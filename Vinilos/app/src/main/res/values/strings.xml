@@ -5,4 +5,5 @@
     <string name="contrasena">Contraseña</string>
     <string name="ingresar">Ingresar</string>
     <string name="albumes">Albumes</string>
+    <string name="albumesVacios">No hay Albumes en el catalogo</string>
 </resources>
