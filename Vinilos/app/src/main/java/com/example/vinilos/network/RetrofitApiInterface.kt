@@ -10,6 +10,6 @@ interface RetrofitApiInterface {
     @GET("/albums")
     fun getAlbums(): Call<List<Album>>
 
-    @GET("/artists")
+    @GET("/musicians")
     fun getArtists(): Call<List<Artista>>
 }

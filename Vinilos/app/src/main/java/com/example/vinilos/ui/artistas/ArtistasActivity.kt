@@ -32,8 +32,10 @@ class ArtistasActivity : AppCompatActivity() {
 
         viewModel = ViewModelProvider(this, ArtistaViewModel.Factory(application)).get(ArtistaViewModel::class.java)
         viewModel.artistas.observe(this) {
-            recycler.visibility = View.VISIBLE
-            adapter.setData(it as ArrayList<Artista>)
+            if(it.isNotEmpty()){
+                recycler.visibility = View.VISIBLE
+                adapter.setData(it as ArrayList<Artista>)
+            }
         }
         viewModel.eventNetworkError.observe(this) { isNetworkError ->
             if (isNetworkError) onNetworkError()
