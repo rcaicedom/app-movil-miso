@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import com.example.vinilos.databinding.ActivityLoginBinding
 import com.example.vinilos.ui.album.AlbumesActivity
+import com.example.vinilos.ui.artistas.ArtistasActivity
 
 class LoginActivity : AppCompatActivity() {
 
@@ -27,7 +28,7 @@ class LoginActivity : AppCompatActivity() {
         ingresarButton = binding.ingresarButton
         val loading = binding.loading
 
-        val albumesIntent = Intent(this, AlbumesActivity::class.java)
+        val albumesIntent = Intent(this, ArtistasActivity::class.java)
         ingresarButton.setOnClickListener {
             loading.visibility = View.VISIBLE
             try {

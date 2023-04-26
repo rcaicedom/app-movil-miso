@@ -6,4 +6,6 @@
     <string name="ingresar">Ingresar</string>
     <string name="albums">Albumes</string>
     <string name="add">+</string>
+    <string name="artistas">Artistas</string>
+    <string name="title_activity_artistas">ArtistasActivity</string>
 </resources>

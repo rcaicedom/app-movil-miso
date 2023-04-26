@@ -17,7 +17,7 @@
         android:layout_height="50dp"
         android:layout_marginTop="22dp"
         android:fontFamily="@font/poppins_light"
-        android:text="@string/albumes"
+        android:text="@string/albums"
         android:textAlignment="center"
         android:textColor="#FFFFFF"
         android:textSize="36sp"
