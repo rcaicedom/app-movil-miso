@@ -1,9 +1,11 @@
 package com.example.vinilos.ui.artistas
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -11,7 +13,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.vinilos.R
 import com.example.vinilos.data.artista.Artista
 import com.example.vinilos.databinding.ActivityArtistaBinding
+import com.example.vinilos.ui.album.AlbumesActivity
 import com.example.vinilos.viewmodel.artistas.ArtistaViewModel
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 
 class ArtistasActivity : AppCompatActivity() {
@@ -20,6 +24,8 @@ class ArtistasActivity : AppCompatActivity() {
     private lateinit var viewModel: ArtistaViewModel
     private lateinit var adapter: ArtistasAdapter
     private lateinit var recycler: RecyclerView
+    private lateinit var navigation: BottomNavigationView
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,6 +36,9 @@ class ArtistasActivity : AppCompatActivity() {
         recycler.layoutManager = LinearLayoutManager(this)
         recycler.adapter = adapter
 
+        navigation = artistaBinding.artistasBottomNavigation
+        navigation.selectedItemId = R.id.artistas
+
         viewModel = ViewModelProvider(this, ArtistaViewModel.Factory(application)).get(ArtistaViewModel::class.java)
         viewModel.artistas.observe(this) {
             if(it.isNotEmpty()){
@@ -39,6 +48,20 @@ class ArtistasActivity : AppCompatActivity() {
         }
         viewModel.eventNetworkError.observe(this) { isNetworkError ->
             if (isNetworkError) onNetworkError()
+        }
+
+        navigation.setOnNavigationItemSelectedListener {
+            when (it.itemId) {
+                R.id.artistas -> true
+                R.id.albumes -> {
+                    ActivityCompat.startActivity(
+                        this,
+                        Intent(this, AlbumesActivity::class.java), null
+                    );
+                    true
+                }
+                else -> true
+            }
         }
     }
     private fun onNetworkError() {
