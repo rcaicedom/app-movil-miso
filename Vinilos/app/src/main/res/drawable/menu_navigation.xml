@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/albumes"
+        android:title="Albumes"
+        android:icon="@drawable/vinyl"/>
+    <item
+        android:id="@+id/coleccionistas"
+        android:title="Coleccionistas"
+        android:icon="@drawable/profile"
+        android:enabled="false"
+        />
+
+    <item
+        android:id="@+id/artistas"
+        android:title="Artistas"
+        android:icon="@drawable/microphone"/>
+
+</menu>
