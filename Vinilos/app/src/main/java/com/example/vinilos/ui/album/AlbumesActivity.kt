@@ -32,7 +32,7 @@ class AlbumesActivity: AppCompatActivity() {
         albumesBinding = ActivityAlbumesBinding.inflate(layoutInflater)
         setContentView(albumesBinding.root)
         recycler = findViewById(R.id.recyclerAlbumes)
-        adapter = AlbumesAdapter()
+        adapter = AlbumesAdapter(this)
         recycler.layoutManager = GridLayoutManager(this,2)
         recycler.adapter = adapter
         esColeccionista = intent.getBooleanExtra("COLECCIONISTA", false)
