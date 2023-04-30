@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageButton
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -26,6 +27,7 @@ class AlbumesActivity: AppCompatActivity() {
     private lateinit var anadirButton: ImageButton
     private var esColeccionista: Boolean = false
     private lateinit var navigation: BottomNavigationView
+    private lateinit var albumesVacios: TextView
 
     override fun onCreate(savedInstanceState: Bundle?){
         super.onCreate(savedInstanceState)
@@ -41,13 +43,19 @@ class AlbumesActivity: AppCompatActivity() {
         if (!esColeccionista){
             anadirButton.visibility = View.GONE
         }
+        albumesVacios = albumesBinding.textAlbumesVacios
         navigation = albumesBinding.albumesBottomNavigation
         navigation.selectedItemId = R.id.albumes
 
         viewModel = ViewModelProvider(this, AlbumViewModel.Factory(application)).get(AlbumViewModel::class.java)
         viewModel.albums.observe(this) {
-            recycler.visibility = View.VISIBLE
-            adapter.setData(it as ArrayList<Album>)
+            if(it.isNotEmpty()) {
+                recycler.visibility = View.VISIBLE
+                adapter.setData(it as ArrayList<Album>)
+                albumesVacios.visibility = View.GONE
+            } else {
+                albumesVacios.visibility = View.VISIBLE
+            }
         }
         viewModel.eventNetworkError.observe(this) { isNetworkError ->
             if (isNetworkError) onNetworkError()
@@ -71,10 +79,17 @@ class AlbumesActivity: AppCompatActivity() {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        navigation.selectedItemId = R.id.albumes
+    }
+
     private fun onNetworkError() {
         if(!viewModel.isNetworkErrorShown.value!!) {
             Toast.makeText(this, "Network Error", Toast.LENGTH_LONG).show()
             viewModel.onNetworkErrorShown()
+            albumesVacios.text = "Error de conexion"
+            albumesVacios.visibility = View.VISIBLE
         }
     }
 }
