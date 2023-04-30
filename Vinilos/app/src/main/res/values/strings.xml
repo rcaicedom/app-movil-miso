@@ -8,4 +8,12 @@
     <string name="add">+</string>
     <string name="artistas">Artistas</string>
     <string name="title_activity_artistas">ArtistasActivity</string>
+    <string name="descripcion">Descripcion:</string>
+    <string name="fecha_de_salida_al_mercado">Fecha de salida:</string>
+    <string name="genero">Genero:</string>
+    <string name="casa_discografica">Casa Discografica:</string>
+    <string name="tracks">Tracks:</string>
+    <string name="track_x">Track x</string>
+    <string name="no_hay_tracks_registrados">No hay tracks registrados</string>
+    <string name="no_hay_artistas_registrados">No hay artistas registrados</string>
 </resources>

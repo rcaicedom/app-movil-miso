@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#22223A"
+    android:paddingLeft="16dp"
+    android:paddingTop="16dp"
+    android:paddingRight="16dp"
+    android:paddingBottom="16dp"
+    tools:context=".ui.album.AlbumDetalleActivity">
+
+
+    <TextView
+        android:id="@+id/titleAlbumDetalle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="22dp"
+        android:fontFamily="@font/poppins_light"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="36sp"
+        android:textStyle="normal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/albumDetalleImagen"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
+        android:layout_marginTop="35dp"
+        android:background="@drawable/albums_border"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titleAlbumDetalle" />
+
+
+    <TextView
+        android:id="@+id/labelAlbumDetalleFecha"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginStart="20dp"
+
+        android:fontFamily="@font/poppins_light"
+        android:text="@string/fecha_de_salida_al_mercado"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:textStyle="normal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/albumDetalleImagen" />
+
+    <TextView
+        android:id="@+id/textAlbumDetalleFecha"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginStart="10dp"
+        android:fontFamily="@font/poppins_light"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        android:textStyle="normal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toEndOf="@+id/labelAlbumDetalleFecha"
+        app:layout_constraintTop_toBottomOf="@+id/albumDetalleImagen" />
+
+    <TextView
+        android:id="@+id/labelAlbumDetalleDescripcion"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_marginTop="22dp"
+        android:layout_marginStart="20dp"
+        android:fontFamily="@font/poppins_light"
+        android:text="@string/descripcion"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:textStyle="normal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textAlbumDetalleFecha" />
+
+    <TextView
+        android:id="@+id/textAlbumDetalleDescripcion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="22dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:fontFamily="@font/poppins_light"
+        android:textAlignment="textStart"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        android:textStyle="normal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/labelAlbumDetalleDescripcion" />
+
+    <TextView
+        android:id="@+id/labelAlbumDetalleGenero"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_marginTop="22dp"
+        android:layout_marginStart="20dp"
+        android:fontFamily="@font/poppins_light"
+        android:text="@string/genero"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:textStyle="normal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textAlbumDetalleDescripcion" />
+
+    <TextView
+        android:id="@+id/textAlbumDetalleGenero"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginStart="10dp"
+        android:fontFamily="@font/poppins_light"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        android:textStyle="normal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0."
+        app:layout_constraintStart_toEndOf="@+id/labelAlbumDetalleGenero"
+        app:layout_constraintTop_toBottomOf="@+id/textAlbumDetalleDescripcion" />
+
+    <TextView
+        android:id="@+id/labelAlbumDetalleCasa"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_marginTop="22dp"
+        android:layout_marginStart="20dp"
+        android:fontFamily="@font/poppins_light"
+        android:text="@string/casa_discografica"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:textStyle="normal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textAlbumDetalleGenero" />
+
+    <TextView
+        android:id="@+id/textAlbumDetalleCasa"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginStart="10dp"
+        android:fontFamily="@font/poppins_light"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        android:textStyle="normal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0."
+        app:layout_constraintStart_toEndOf="@+id/labelAlbumDetalleCasa"
+        app:layout_constraintTop_toBottomOf="@+id/textAlbumDetalleGenero" />
+
+    <TextView
+        android:id="@+id/labelAlbumDetalleArtistas"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_marginTop="22dp"
+        android:layout_marginStart="20dp"
+        android:fontFamily="@font/poppins_light"
+        android:text="@string/artistas"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:textStyle="normal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textAlbumDetalleCasa" />
+
+    <LinearLayout
+        android:id="@+id/albumArtistasLayout"
+        android:layout_width="356dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="22dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/labelAlbumDetalleArtistas">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/albumArtistasRecycler"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="parent" />
+
+        <TextView
+            android:id="@+id/artistasEmptyText"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:visibility="gone"
+            android:textAlignment="center"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            android:textStyle="normal"
+            android:text="@string/no_hay_artistas_registrados"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="parent"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/labelAlbumDetalleTracks"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_marginTop="22dp"
+        android:layout_marginStart="20dp"
+        android:fontFamily="@font/poppins_light"
+        android:text="@string/tracks"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:textStyle="normal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/albumArtistasLayout" />
+
+    <LinearLayout
+        android:id="@+id/albumTracksLayout"
+        android:layout_width="356dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="22dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/labelAlbumDetalleTracks">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/albumTracksRecycler"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="parent" />
+
+        <TextView
+            android:id="@+id/tracksEmptyText"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:visibility="gone"
+            android:textAlignment="center"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            android:textStyle="normal"
+            android:text="@string/no_hay_tracks_registrados"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="parent"
+            />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
