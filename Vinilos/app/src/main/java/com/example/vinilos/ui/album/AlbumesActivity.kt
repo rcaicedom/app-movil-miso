@@ -2,6 +2,7 @@ package com.example.vinilos.ui.album
 
 import android.os.Bundle
 import android.view.View
+import android.widget.ImageButton
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
@@ -18,6 +19,8 @@ class AlbumesActivity: AppCompatActivity() {
     private lateinit var viewModel: AlbumViewModel
     private lateinit var adapter: AlbumesAdapter
     private lateinit var recycler: RecyclerView
+    private lateinit var anadirButton: ImageButton
+    private var esColeccionista: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?){
         super.onCreate(savedInstanceState)
@@ -27,6 +30,12 @@ class AlbumesActivity: AppCompatActivity() {
         adapter = AlbumesAdapter()
         recycler.layoutManager = GridLayoutManager(this,2)
         recycler.adapter = adapter
+        esColeccionista = intent.getBooleanExtra("COLECCIONISTA", false)
+        anadirButton = albumesBinding.agregarAlbumButton
+        anadirButton.isEnabled = false
+        if (!esColeccionista){
+            anadirButton.visibility = View.GONE
+        }
 
         viewModel = ViewModelProvider(this, AlbumViewModel.Factory(application)).get(AlbumViewModel::class.java)
         viewModel.albums.observe(this) {
