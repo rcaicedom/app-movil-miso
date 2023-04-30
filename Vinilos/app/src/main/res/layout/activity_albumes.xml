@@ -43,6 +43,24 @@
         app:srcCompat="@drawable/add"
         app:tint="@color/white" />
 
+    <TextView
+        android:id="@+id/textAlbumesVacios"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_marginTop="18dp"
+        android:fontFamily="@font/poppins_light"
+        android:text="@string/no_hay_albumes_registrados"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="22sp"
+        android:textStyle="normal"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/albumesLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <LinearLayout
         android:id="@+id/albumesLayout"
         android:layout_width="366dp"

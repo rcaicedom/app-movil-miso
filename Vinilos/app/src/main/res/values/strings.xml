@@ -16,4 +16,5 @@
     <string name="track_x">Track x</string>
     <string name="no_hay_tracks_registrados">No hay tracks registrados</string>
     <string name="no_hay_artistas_registrados">No hay artistas registrados</string>
+    <string name="no_hay_albumes_registrados">No hay albumes registrados</string>
 </resources>

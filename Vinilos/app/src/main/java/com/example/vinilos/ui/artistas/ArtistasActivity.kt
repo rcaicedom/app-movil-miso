@@ -3,6 +3,7 @@ package com.example.vinilos.ui.artistas
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -25,7 +26,7 @@ class ArtistasActivity : AppCompatActivity() {
     private lateinit var adapter: ArtistasAdapter
     private lateinit var recycler: RecyclerView
     private lateinit var navigation: BottomNavigationView
-
+    private lateinit var artistasVacios: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,12 +39,16 @@ class ArtistasActivity : AppCompatActivity() {
 
         navigation = artistaBinding.artistasBottomNavigation
         navigation.selectedItemId = R.id.artistas
+        artistasVacios = artistaBinding.textArtistasVacios
 
         viewModel = ViewModelProvider(this, ArtistaViewModel.Factory(application)).get(ArtistaViewModel::class.java)
         viewModel.artistas.observe(this) {
             if(it.isNotEmpty()){
                 recycler.visibility = View.VISIBLE
                 adapter.setData(it as ArrayList<Artista>)
+                artistasVacios.visibility = View.GONE
+            } else {
+                artistasVacios.visibility = View.VISIBLE
             }
         }
         viewModel.eventNetworkError.observe(this) { isNetworkError ->
@@ -64,10 +69,17 @@ class ArtistasActivity : AppCompatActivity() {
             }
         }
     }
+
+    override fun onResume() {
+        super.onResume()
+        navigation.selectedItemId = R.id.artistas
+    }
     private fun onNetworkError() {
         if(!viewModel.isNetworkErrorShown.value!!) {
-            Toast.makeText(this, "Network Error", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, "Error de conexion", Toast.LENGTH_LONG).show()
             viewModel.onNetworkErrorShown()
+            artistasVacios.text = "Error de conexion"
+            artistasVacios.visibility = View.VISIBLE
         }
     }
 }
