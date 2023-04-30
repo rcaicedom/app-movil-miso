@@ -13,4 +13,14 @@ class AlbumRepository(private val application: Application) {
             }
         }, onFailure)
     }
+
+    fun getAlbum(idAlbum: Int, callBack: (AlbumDetalle?) -> Unit, onFailure: (String) -> Unit) {
+        NetworkServiceAdapter.getInstance(application).getAlbum(idAlbum, {
+            if (it.code() == 200 && it.body() != null) {
+                callBack(it.body()!!)
+            } else {
+                callBack(null)
+            }
+        }, onFailure)
+    }
 }
