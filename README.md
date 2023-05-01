@@ -6,3 +6,5 @@ Para correr está aplicacion debe tener instalado el programa android studio y s
 2. Abra el programa android studio e importe el proyecto
 3. Sincronice el proyecto con gradle, para este paso vaya a File -> Sync project with gradle files
 4. Una vez terminado el paso 3, dar click en el boton "Run", esto correrá la app en un simulador Pixe, si desea ejecutarlo en otro dispositivo vaya a Device Manager -> Create device y seleccione el dispositivo que desee.
+
+Nota: Es recomendable tener activado las Opciones de Desarrollador en el dispositivo en el que se vaya a probar la aplicación.
