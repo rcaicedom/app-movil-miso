@@ -4,6 +4,7 @@ import android.content.Context
 import com.example.vinilos.data.album.Album
 import com.example.vinilos.data.artista.Artista
 import com.example.vinilos.data.album.AlbumDetalle
+import com.example.vinilos.data.coleccionista.Coleccionista
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
 import retrofit2.Call
@@ -90,6 +91,21 @@ class NetworkServiceAdapter constructor(context: Context) {
             }
 
             override fun onResponse(call: Call<AlbumDetalle>, response: Response<AlbumDetalle>) {
+                onResponse(response)
+            }
+        })
+    }
+
+    fun getCollectors(
+        onResponse: (resp: Response<List<Coleccionista>>) -> Unit,
+        onFailure: (resp: String) -> Unit
+    ) {
+        retrofitApiInterface.getCollectors().enqueue(object : Callback<List<Coleccionista>> {
+            override fun onFailure(call: Call<List<Coleccionista>>, t: Throwable) {
+                onFailure("No se encontraron coleccionistas, intente mas tarde")
+            }
+
+            override fun onResponse(call: Call<List<Coleccionista>>, response: Response<List<Coleccionista>>) {
                 onResponse(response)
             }
         })

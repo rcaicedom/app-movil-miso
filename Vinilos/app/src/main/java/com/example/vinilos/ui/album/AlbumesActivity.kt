@@ -15,6 +15,7 @@ import com.example.vinilos.R
 import com.example.vinilos.data.album.Album
 import com.example.vinilos.databinding.ActivityAlbumesBinding
 import com.example.vinilos.ui.artistas.ArtistasActivity
+import com.example.vinilos.ui.coleccionista.ColeccionistasActivity
 import com.example.vinilos.viewmodel.album.AlbumViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
@@ -64,9 +65,22 @@ class AlbumesActivity: AppCompatActivity() {
         navigation.setOnNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.artistas -> {
+                    intent = Intent(this, ArtistasActivity::class.java)
+                    intent.flags =Intent.FLAG_ACTIVITY_REORDER_TO_FRONT
                     ActivityCompat.startActivity(
                         this,
-                        Intent(this, ArtistasActivity::class.java),
+                        intent,
+                        null
+                    );
+                    true
+                }
+
+                R.id.coleccionistas -> {
+                    intent = Intent(this, ColeccionistasActivity::class.java)
+                    intent.flags =Intent.FLAG_ACTIVITY_REORDER_TO_FRONT
+                    ActivityCompat.startActivity(
+                        this,
+                        intent,
                         null
                     );
                     true

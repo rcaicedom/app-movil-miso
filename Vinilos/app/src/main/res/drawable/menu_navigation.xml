@@ -9,7 +9,6 @@
         android:id="@+id/coleccionistas"
         android:title="Coleccionistas"
         android:icon="@drawable/profile"
-        android:enabled="false"
         />
 
     <item
