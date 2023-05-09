@@ -3,6 +3,7 @@ package com.example.vinilos.network
 import com.example.vinilos.data.album.Album
 import com.example.vinilos.data.artista.Artista
 import com.example.vinilos.data.album.AlbumDetalle
+import com.example.vinilos.data.coleccionista.Coleccionista
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -16,4 +17,7 @@ interface RetrofitApiInterface {
 
     @GET("/albums/{idAlbum}")
     fun getAlbum(@Path("idAlbum") idAlbum: Int): Call<AlbumDetalle>
+
+    @GET("/collectors")
+    fun getCollectors(): Call<List<Coleccionista>>
 }
