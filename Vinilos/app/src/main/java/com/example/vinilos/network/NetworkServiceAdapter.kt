@@ -5,6 +5,7 @@ import com.example.vinilos.data.album.Album
 import com.example.vinilos.data.artista.Artista
 import com.example.vinilos.data.album.AlbumDetalle
 import com.example.vinilos.data.coleccionista.Coleccionista
+import com.example.vinilos.data.coleccionista.ColeccionistaDetalle
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
 import retrofit2.Call
@@ -106,6 +107,22 @@ class NetworkServiceAdapter constructor(context: Context) {
             }
 
             override fun onResponse(call: Call<List<Coleccionista>>, response: Response<List<Coleccionista>>) {
+                onResponse(response)
+            }
+        })
+    }
+
+    fun getCollector(
+        idCollector: Int,
+        onResponse: (resp: Response<ColeccionistaDetalle>) -> Unit,
+        onFailure: (resp: String) -> Unit
+    ) {
+        retrofitApiInterface.getCollector(idCollector).enqueue(object : Callback<ColeccionistaDetalle> {
+            override fun onFailure(call: Call<ColeccionistaDetalle>, t: Throwable) {
+                onFailure("Error al cargar la informacion")
+            }
+
+            override fun onResponse(call: Call<ColeccionistaDetalle>, response: Response<ColeccionistaDetalle>) {
                 onResponse(response)
             }
         })
