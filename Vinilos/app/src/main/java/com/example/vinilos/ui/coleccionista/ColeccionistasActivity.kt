@@ -32,7 +32,7 @@ class ColeccionistasActivity: AppCompatActivity() {
         coleccionistasBinding = ActivityColeccionistasBinding.inflate(layoutInflater)
         setContentView(coleccionistasBinding.root)
         recycler = findViewById(R.id.coleccionistasRecycler)
-        adapter = ColeccionistasAdapter()
+        adapter = ColeccionistasAdapter(this)
         recycler.layoutManager = LinearLayoutManager(this)
         recycler.adapter = adapter
 

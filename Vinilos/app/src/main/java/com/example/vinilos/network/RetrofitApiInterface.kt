@@ -4,6 +4,7 @@ import com.example.vinilos.data.album.Album
 import com.example.vinilos.data.artista.Artista
 import com.example.vinilos.data.album.AlbumDetalle
 import com.example.vinilos.data.coleccionista.Coleccionista
+import com.example.vinilos.data.coleccionista.ColeccionistaDetalle
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -20,4 +21,7 @@ interface RetrofitApiInterface {
 
     @GET("/collectors")
     fun getCollectors(): Call<List<Coleccionista>>
+
+    @GET("/collectors/{idCollector}")
+    fun getCollector(@Path("idCollector") idCollector: Int): Call<ColeccionistaDetalle>
 }
