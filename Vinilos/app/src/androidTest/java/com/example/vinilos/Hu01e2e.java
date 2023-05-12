@@ -62,7 +62,7 @@ public class Hu01e2e {
     public void hu06End2EndTest() throws InterruptedException {
         ViewInteraction skipBtn = onView(allOf(withId(R.id.ingresarVisitante),withText("Ingresar como Visitante"), isDisplayed()));
         skipBtn.perform(click());
-        onView(allOf(withText("Artistas"), isDescendantOfA(withId(R.id.artistas_bottom_navigation)))).perform(click());
+        onView(allOf(withId(R.id.artistas), isDescendantOfA(withId(R.id.albumes_bottom_navigation)))).perform(click());
         Thread.sleep(1000);
         onView(allOf(withId(R.id.artistasRecycler))).check(matches(isDisplayed()));
     }
