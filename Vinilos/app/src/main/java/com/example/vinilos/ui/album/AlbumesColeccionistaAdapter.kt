@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
@@ -17,7 +18,7 @@ import com.example.vinilos.viewmodel.album.AlbumDetalleViewModel
 import com.squareup.picasso.Picasso
 
 
-class AlbumesColeccionistaAdapter(private val contexto: ColeccionistaDetalleActivity) :
+class AlbumesColeccionistaAdapter(private val contexto: AppCompatActivity) :
     RecyclerView.Adapter<AlbumesColeccionistaAdapter.AlbumesColeccionistaViewHolder>() {
         private var data: ArrayList<AlbumColeccionista>? = null
 
@@ -46,7 +47,7 @@ class AlbumesColeccionistaAdapter(private val contexto: ColeccionistaDetalleActi
     class AlbumesColeccionistaViewHolder(itemView: View) :
         RecyclerView.ViewHolder(itemView) {
 
-        fun bindView(item: AlbumColeccionista?, contexto: ColeccionistaDetalleActivity) {
+        fun bindView(item: AlbumColeccionista?, contexto: AppCompatActivity) {
             val id = item!!.id
 
             val viewModel = ViewModelProvider(contexto, AlbumDetalleViewModel.Factory(contexto.application, id)).get(AlbumDetalleViewModel::class.java)

@@ -34,7 +34,7 @@ class ArtistasActivity : AppCompatActivity() {
         artistaBinding = ActivityArtistaBinding.inflate(layoutInflater)
         setContentView(artistaBinding.root)
         recycler = findViewById(R.id.artistasRecycler)
-        adapter = ArtistasAdapter()
+        adapter = ArtistasAdapter(this)
         recycler.layoutManager = LinearLayoutManager(this)
         recycler.adapter = adapter
 

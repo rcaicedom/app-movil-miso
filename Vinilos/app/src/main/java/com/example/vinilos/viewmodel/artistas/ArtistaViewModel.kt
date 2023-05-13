@@ -12,9 +12,9 @@ import java.lang.IllegalArgumentException
 
 class ArtistaViewModel(application: Application) : AndroidViewModel(application){
   private val artistaRepository =  ArtistaRepository(application)
-  private val _artista = MutableLiveData<List<Artista>>()
+  private val _artistas = MutableLiveData<List<Artista>>()
   val artistas: LiveData<List<Artista>>
-    get() = _artista
+    get() = _artistas
 
   private val _eventNetworkError = MutableLiveData<Boolean>(false)
   val eventNetworkError: LiveData<Boolean>
@@ -28,28 +28,32 @@ class ArtistaViewModel(application: Application) : AndroidViewModel(application)
     refreshDataFromNetwork()
   }
 
-   private fun refreshDataFromNetwork(){
-     artistaRepository.refreshData({
-       _artista.postValue(it)
-       _eventNetworkError.value = false
-       _isNetworkErrorShown.value = false
-     }, {
-       _eventNetworkError.value = true
-     })
-   }
+  private fun refreshDataFromNetwork(){
+    artistaRepository.refreshData({
+      artistaRepository.getBands({bands ->
+        _artistas.postValue(it + bands)
+        _eventNetworkError.value = false
+        _isNetworkErrorShown.value = false
+      }, {
+        _eventNetworkError.value = true
+      })
+    }, {
+      _eventNetworkError.value = true
+    })
+  }
 
   fun onNetworkErrorShown(){
     _isNetworkErrorShown.value = true
   }
-   class Factory(val app : Application): ViewModelProvider.Factory{
-     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-       if(modelClass.isAssignableFrom(ArtistaViewModel::class.java)){
-         @Suppress("UNCHECKED_CAST")
-         return ArtistaViewModel(app) as T
-       }
-       throw IllegalArgumentException("No se pudo construir el ViewModel")
-     }
-   }
+  class Factory(val app : Application): ViewModelProvider.Factory{
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
+      if(modelClass.isAssignableFrom(ArtistaViewModel::class.java)){
+        @Suppress("UNCHECKED_CAST")
+        return ArtistaViewModel(app) as T
+      }
+      throw IllegalArgumentException("No se pudo construir el ViewModel")
+    }
+  }
 
 
 }

@@ -44,6 +44,10 @@
             android:name=".ui.coleccionista.ColeccionistaDetalleActivity"
             android:exported="true">
         </activity>
+        <activity
+            android:name=".ui.artistas.ArtistaDetalleActivity"
+            android:exported="true">
+        </activity>
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

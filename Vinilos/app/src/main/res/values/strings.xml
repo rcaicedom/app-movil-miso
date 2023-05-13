@@ -23,4 +23,8 @@
     <string name="artistas_favoritos">Artistas favoritos:</string>
     <string name="no_hay_artistas_favoritos">No hay artistas favoritos</string>
     <string name="el_coleccionista_no_tiene_albumes">El coleccionista no tiene albumes</string>
+    <string name="fecha_de_nacimiento">Fecha de Nacimiento:</string>
+    <string name="premios">Premios</string>
+    <string name="no_hay_premios_registrados">No hay premios registrados.</string>
+    <string name="premio_x">Premio x</string>
 </resources>

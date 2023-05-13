@@ -4,8 +4,10 @@ import android.content.Context
 import com.example.vinilos.data.album.Album
 import com.example.vinilos.data.artista.Artista
 import com.example.vinilos.data.album.AlbumDetalle
+import com.example.vinilos.data.artista.ArtistaDetalle
 import com.example.vinilos.data.coleccionista.Coleccionista
 import com.example.vinilos.data.coleccionista.ColeccionistaDetalle
+import com.example.vinilos.data.premio.Premio
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
 import retrofit2.Call
@@ -123,6 +125,69 @@ class NetworkServiceAdapter constructor(context: Context) {
             }
 
             override fun onResponse(call: Call<ColeccionistaDetalle>, response: Response<ColeccionistaDetalle>) {
+                onResponse(response)
+            }
+        })
+    }
+
+    fun getBands(
+        onResponse: (resp: Response<List<Artista>>) -> Unit,
+        onFailure: (resp: String) -> Unit
+    ) {
+        retrofitApiInterface.getBands().enqueue(object : Callback<List<Artista>> {
+            override fun onFailure(call: Call<List<Artista>>, t: Throwable) {
+                onFailure("No se encontraron bandas, intente mas tarde")
+            }
+
+            override fun onResponse(call: Call<List<Artista>>, response: Response<List<Artista>>) {
+                onResponse(response)
+            }
+        })
+    }
+
+    fun getArtist(
+        idMusician: Int,
+        onResponse: (resp: Response<ArtistaDetalle>) -> Unit,
+        onFailure: (resp: String) -> Unit
+    ) {
+        retrofitApiInterface.getArtist(idMusician).enqueue(object : Callback<ArtistaDetalle> {
+            override fun onFailure(call: Call<ArtistaDetalle>, t: Throwable) {
+                onFailure("Error al cargar la informacion")
+            }
+
+            override fun onResponse(call: Call<ArtistaDetalle>, response: Response<ArtistaDetalle>) {
+                onResponse(response)
+            }
+        })
+    }
+
+    fun getBand(
+        idBand: Int,
+        onResponse: (resp: Response<ArtistaDetalle>) -> Unit,
+        onFailure: (resp: String) -> Unit
+    ) {
+        retrofitApiInterface.getBand(idBand).enqueue(object : Callback<ArtistaDetalle> {
+            override fun onFailure(call: Call<ArtistaDetalle>, t: Throwable) {
+                onFailure("Error al cargar la informacion")
+            }
+
+            override fun onResponse(call: Call<ArtistaDetalle>, response: Response<ArtistaDetalle>) {
+                onResponse(response)
+            }
+        })
+    }
+
+    fun getPrize(
+        idPrize: Int,
+        onResponse: (resp: Response<Premio>) -> Unit,
+        onFailure: (resp: String) -> Unit
+    ) {
+        retrofitApiInterface.getPrize(idPrize).enqueue(object : Callback<Premio> {
+            override fun onFailure(call: Call<Premio>, t: Throwable) {
+                onFailure("Error al cargar la informacion")
+            }
+
+            override fun onResponse(call: Call<Premio>, response: Response<Premio>) {
                 onResponse(response)
             }
         })
