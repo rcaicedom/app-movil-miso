@@ -49,7 +49,7 @@ class AlbumDetalleActivity: AppCompatActivity() {
         albumCasa = albumDetalleBinding.textAlbumDetalleCasa
 
         artistasRecycler = albumDetalleBinding.albumArtistasRecycler
-        artistasAdapter = ArtistasAdapter()
+        artistasAdapter = ArtistasAdapter(this)
         artistasRecycler.layoutManager = LinearLayoutManager(this)
         artistasRecycler.adapter = artistasAdapter
         artistasEmptyText = albumDetalleBinding.artistasEmptyText
