@@ -1,47 +1,39 @@
 package com.example.vinilos.data.artista
 
 import android.app.Application
+import androidx.lifecycle.LiveData
 import com.example.vinilos.network.NetworkServiceAdapter
+import com.example.vinilos.network.CacheManager
 
 class ArtistaRepository(private val application: Application) {
 
-    fun refreshData(callback: (List<Artista>) -> Unit, onFailure: (String) -> Unit) {
-        NetworkServiceAdapter.getInstance(application).getArtists({
-            if (it.code() == 200 && it.body() != null) {
-                callback(it.body()!!)
-            } else {
-                callback(emptyList())
-            }
-        }, onFailure)
+    suspend fun refreshData(): LiveData<List<Artista>> {
+        return NetworkServiceAdapter.getInstance(application).getArtists()
     }
 
-    fun getBands(callback: (List<Artista>) -> Unit,onFailure: (String) -> Unit) {
-        NetworkServiceAdapter.getInstance(application).getBands({
-            if (it.code() == 200 && it.body() != null){
-                callback(it.body()!!)
-            } else {
-                callback(emptyList())
-            }
-        }, onFailure)
+    suspend fun getBands(): LiveData<List<Artista>> {
+        return NetworkServiceAdapter.getInstance(application).getBands()
     }
 
-    fun getArtist(idArtist: Int, callBack: (ArtistaDetalle?) -> Unit, onFailure: (String) -> Unit) {
-        NetworkServiceAdapter.getInstance(application).getArtist(idArtist, {
-            if (it.code() == 200 && it.body() != null) {
-                callBack(it.body()!!)
-            } else {
-                callBack(null)
-            }
-        }, onFailure)
+    suspend fun getArtist(idArtist: Int): ArtistaDetalle {
+        val potentialResp = CacheManager.getInstance(application.applicationContext).getArtist(idArtist)
+        return if(potentialResp == null){
+            val artist = NetworkServiceAdapter.getInstance(application).getArtist(idArtist)
+            CacheManager.getInstance(application.applicationContext).addArtist(idArtist, artist!!)
+            artist
+        } else {
+            potentialResp
+        }
     }
 
-    fun getBand(idBand: Int, callBack: (ArtistaDetalle?) -> Unit, onFailure: (String) -> Unit) {
-        NetworkServiceAdapter.getInstance(application).getBand(idBand, {
-            if (it.code() == 200 && it.body() != null) {
-                callBack(it.body()!!)
-            } else {
-                callBack(null)
-            }
-        }, onFailure)
+    suspend fun getBand(idBand: Int): ArtistaDetalle {
+        val potentialResp = CacheManager.getInstance(application.applicationContext).getBand(idBand)
+        return if(potentialResp == null){
+            val band = NetworkServiceAdapter.getInstance(application).getBand(idBand)
+            CacheManager.getInstance(application.applicationContext).addBand(idBand, band!!)
+            band
+        } else {
+            potentialResp
+        }
     }
 }

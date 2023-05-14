@@ -53,7 +53,7 @@ class AlbumesActivity : AppCompatActivity() {
             AlbumViewModel.Factory(application)
         ).get(AlbumViewModel::class.java)
         viewModel.albums.observe(this) {
-            if (it.isNotEmpty()) {
+            if(it?.isNotEmpty() == true) {
                 recycler.visibility = View.VISIBLE
                 adapter.setData(it as ArrayList<Album>)
                 albumesVacios.visibility = View.GONE

@@ -6,8 +6,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewModelScope
 import com.example.vinilos.data.premio.Premio
 import com.example.vinilos.data.premio.PremioRepository
+import kotlinx.coroutines.CoroutineExceptionHandler
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class PremioViewModel(application: Application, idPremio: Int) : AndroidViewModel(application) {
 
@@ -28,18 +33,29 @@ class PremioViewModel(application: Application, idPremio: Int) : AndroidViewMode
     val isNetworkErrorShown: LiveData<Boolean>
         get() = _isNetworkErrorShown
 
+    private val coroutineExceptionHandler = CoroutineExceptionHandler{ _, throwable ->
+        throwable.printStackTrace()
+        _eventNetworkError.postValue(true)
+    }
+
     init {
         refreshDataFromNetwork(idPremio)
     }
 
     private fun refreshDataFromNetwork(idPremio: Int) {
-        premioRepository.getPrize(idPremio, {
-            _premio.postValue(it)
-            _eventNetworkError.value = false
-            _isNetworkErrorShown.value = false
-        }, {
-            _eventNetworkError.value = true
-        })
+        try{
+            viewModelScope.launch(Dispatchers.Default + coroutineExceptionHandler) {
+                withContext(Dispatchers.IO) {
+                    val data = premioRepository.getPrize(idPremio).value
+                    _premio.postValue(data)
+                }
+                _eventNetworkError.postValue(false)
+                _isNetworkErrorShown.postValue(false)
+            }
+        }
+        catch (e:Exception){
+            _eventNetworkError.postValue(true)
+        }
     }
 
     fun onNetworkErrorShown() {
@@ -47,7 +63,7 @@ class PremioViewModel(application: Application, idPremio: Int) : AndroidViewMode
     }
 
     class Factory(val app: Application, private val idPremio: Int) : ViewModelProvider.Factory {
-        override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+        override fun <T : ViewModel> create(modelClass: Class<T>): T {
             if (modelClass.isAssignableFrom(PremioViewModel::class.java)) {
                 @Suppress("UNCHECKED_CAST")
                 return PremioViewModel(app, idPremio) as T
