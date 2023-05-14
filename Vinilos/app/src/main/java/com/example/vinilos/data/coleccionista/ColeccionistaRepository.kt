@@ -1,26 +1,16 @@
 package com.example.vinilos.data.coleccionista
 
 import android.app.Application
+import androidx.lifecycle.LiveData
 import com.example.vinilos.network.NetworkServiceAdapter
 
 class ColeccionistaRepository(private val application: Application) {
 
-    fun refreshData(callback: (List<Coleccionista>) -> Unit, onFailure: (String) -> Unit) {
-        NetworkServiceAdapter.getInstance(application).getCollectors({
-            if (it.code() == 200 && it.body() != null){
-                callback(it.body()!!)
-            } else {
-                callback(emptyList())
-            }
-        }, onFailure)
+    suspend fun refreshData(): LiveData<List<Coleccionista>> {
+        return NetworkServiceAdapter.getInstance(application).getCollectors()
     }
-    fun getCollector(idCollector: Int, callBack: (ColeccionistaDetalle?) -> Unit, onFailure: (String) -> Unit) {
-        NetworkServiceAdapter.getInstance(application).getCollector(idCollector, {
-            if (it.code() == 200 && it.body() != null) {
-                callBack(it.body()!!)
-            } else {
-                callBack(null)
-            }
-        }, onFailure)
+
+    suspend fun getCollector(idCollector: Int): LiveData<ColeccionistaDetalle> {
+        return NetworkServiceAdapter.getInstance(application).getCollector(idCollector)
     }
 }

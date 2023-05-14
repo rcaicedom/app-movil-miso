@@ -58,18 +58,18 @@ class NetworkServiceAdapter constructor(context: Context) {
         getRetrofitApiClient().create(RetrofitApiInterface::class.java)
     }
 
-    suspend fun getAlbums() = suspendCoroutine<LiveData<List<Album>>> {
-        val data = MutableLiveData<List<Album>>()
+    suspend fun getAlbums() = suspendCoroutine {
+        var data: List<Album>
         retrofitApiInterface.getAlbums().enqueue(object : Callback<List<Album>> {
             override fun onFailure(call: Call<List<Album>>, t: Throwable) {
                 it.resumeWithException(t)
             }
 
             override fun onResponse(call: Call<List<Album>>, response: Response<List<Album>>) {
-                if (response.code() == 200 && response.body() != null) {
-                    data.value = response.body()!!
+                data = if (response.code() == 200 && response.body() != null) {
+                    response.body()!!
                 } else {
-                    data.value = emptyList()
+                    emptyList()
                 }
                 it.resume(data)
             }
@@ -94,107 +94,127 @@ class NetworkServiceAdapter constructor(context: Context) {
         })
     }
 
-    fun getAlbum( idAlbum: Int) {
+    suspend fun getAlbum( idAlbum: Int) = suspendCoroutine<LiveData<AlbumDetalle>> {
+        val data = MutableLiveData<AlbumDetalle>()
         retrofitApiInterface.getAlbum(idAlbum).enqueue(object : Callback<AlbumDetalle> {
             override fun onFailure(call: Call<AlbumDetalle>, t: Throwable) {
-                onFailure("Error al cargar la informacion")
+                it.resumeWithException(t)
             }
 
             override fun onResponse(call: Call<AlbumDetalle>, response: Response<AlbumDetalle>) {
-                onResponse(response)
+                if (response.code() == 200 && response.body() != null) {
+                    data.value = response.body()!!
+                } else {
+                    data.value = null
+                }
+                it.resume(data)
             }
         })
     }
 
-    fun getCollectors(
-        onResponse: (resp: Response<List<Coleccionista>>) -> Unit,
-        onFailure: (resp: String) -> Unit
-    ) {
+    suspend fun getCollectors() = suspendCoroutine<LiveData<List<Coleccionista>>> {
+        val data = MutableLiveData<List<Coleccionista>>()
         retrofitApiInterface.getCollectors().enqueue(object : Callback<List<Coleccionista>> {
             override fun onFailure(call: Call<List<Coleccionista>>, t: Throwable) {
-                onFailure("No se encontraron coleccionistas, intente mas tarde")
+                it.resumeWithException(t)
             }
 
             override fun onResponse(call: Call<List<Coleccionista>>, response: Response<List<Coleccionista>>) {
-                onResponse(response)
+                if (response.code() == 200 && response.body() != null){
+                    data.value = response.body()!!
+                } else {
+                    data.value = emptyList()
+                }
+                it.resume(data)
             }
         })
     }
 
-    fun getCollector(
-        idCollector: Int,
-        onResponse: (resp: Response<ColeccionistaDetalle>) -> Unit,
-        onFailure: (resp: String) -> Unit
-    ) {
+    suspend fun getCollector(idCollector: Int) = suspendCoroutine<LiveData<ColeccionistaDetalle>> {
+        val data = MutableLiveData<ColeccionistaDetalle>()
         retrofitApiInterface.getCollector(idCollector).enqueue(object : Callback<ColeccionistaDetalle> {
             override fun onFailure(call: Call<ColeccionistaDetalle>, t: Throwable) {
-                onFailure("Error al cargar la informacion")
+                it.resumeWithException(t)
             }
 
             override fun onResponse(call: Call<ColeccionistaDetalle>, response: Response<ColeccionistaDetalle>) {
-                onResponse(response)
+                if (response.code() == 200 && response.body() != null) {
+                    data.value = response.body()!!
+                } else {
+                    data.value = null
+                }
+                it.resume(data)
             }
         })
     }
 
-    fun getBands(
-        onResponse: (resp: Response<List<Artista>>) -> Unit,
-        onFailure: (resp: String) -> Unit
-    ) {
+    suspend fun getBands() = suspendCoroutine<LiveData<List<Artista>>> {
+        val data = MutableLiveData<List<Artista>>()
         retrofitApiInterface.getBands().enqueue(object : Callback<List<Artista>> {
             override fun onFailure(call: Call<List<Artista>>, t: Throwable) {
-                onFailure("No se encontraron bandas, intente mas tarde")
+                it.resumeWithException(t)
             }
             override fun onResponse(call: Call<List<Artista>>, response: Response<List<Artista>>) {
-                onResponse(response)
+                if (response.code() == 200 && response.body() != null){
+                    data.value = response.body()!!
+                } else {
+                    data.value = emptyList()
+                }
+                it.resume(data)
             }
         })
     }
 
-    fun getArtist(
-        idMusician: Int,
-        onResponse: (resp: Response<ArtistaDetalle>) -> Unit,
-        onFailure: (resp: String) -> Unit
-    ) {
+    suspend fun getArtist(idMusician: Int) = suspendCoroutine<LiveData<ArtistaDetalle>> {
+        val data = MutableLiveData<ArtistaDetalle>()
         retrofitApiInterface.getArtist(idMusician).enqueue(object : Callback<ArtistaDetalle> {
             override fun onFailure(call: Call<ArtistaDetalle>, t: Throwable) {
-                onFailure("Error al cargar la informacion")
+                it.resumeWithException(t)
             }
 
             override fun onResponse(call: Call<ArtistaDetalle>, response: Response<ArtistaDetalle>) {
-                onResponse(response)
+                if (response.code() == 200 && response.body() != null) {
+                    data.value = response.body()!!
+                } else {
+                    data.value = null
+                }
+                it.resume(data)
             }
         })
     }
 
-    fun getBand(
-        idBand: Int,
-        onResponse: (resp: Response<ArtistaDetalle>) -> Unit,
-        onFailure: (resp: String) -> Unit
-    ) {
+    suspend fun getBand(idBand: Int) = suspendCoroutine<LiveData<ArtistaDetalle>> {
+        val data = MutableLiveData<ArtistaDetalle>()
         retrofitApiInterface.getBand(idBand).enqueue(object : Callback<ArtistaDetalle> {
             override fun onFailure(call: Call<ArtistaDetalle>, t: Throwable) {
-                onFailure("Error al cargar la informacion")
+                it.resumeWithException(t)
             }
 
             override fun onResponse(call: Call<ArtistaDetalle>, response: Response<ArtistaDetalle>) {
-                onResponse(response)
+                if (response.code() == 200 && response.body() != null) {
+                    data.value = response.body()!!
+                } else {
+                    data.value = null
+                }
+                it.resume(data)
             }
         })
     }
 
-    fun getPrize(
-        idPrize: Int,
-        onResponse: (resp: Response<Premio>) -> Unit,
-        onFailure: (resp: String) -> Unit
-    ) {
+    suspend fun getPrize(idPrize: Int) = suspendCoroutine<LiveData<Premio>> {
+        val data = MutableLiveData<Premio>()
         retrofitApiInterface.getPrize(idPrize).enqueue(object : Callback<Premio> {
             override fun onFailure(call: Call<Premio>, t: Throwable) {
-                onFailure("Error al cargar la informacion")
+                it.resumeWithException(t)
             }
 
             override fun onResponse(call: Call<Premio>, response: Response<Premio>) {
-                onResponse(response)
+                if (response.code() == 200 && response.body() != null) {
+                    data.value = response.body()!!
+                } else {
+                    data.value = null
+                }
+                it.resume(data)
             }
         })
     }

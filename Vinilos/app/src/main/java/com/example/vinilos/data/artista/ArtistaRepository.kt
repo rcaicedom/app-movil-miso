@@ -10,33 +10,15 @@ class ArtistaRepository(private val application: Application) {
         return NetworkServiceAdapter.getInstance(application).getArtists()
     }
 
-    fun getBands(callback: (List<Artista>) -> Unit,onFailure: (String) -> Unit) {
-        NetworkServiceAdapter.getInstance(application).getBands({
-            if (it.code() == 200 && it.body() != null){
-                callback(it.body()!!)
-            } else {
-                callback(emptyList())
-            }
-        }, onFailure)
+    suspend fun getBands(): LiveData<List<Artista>> {
+        return NetworkServiceAdapter.getInstance(application).getBands()
     }
 
-    fun getArtist(idArtist: Int, callBack: (ArtistaDetalle?) -> Unit, onFailure: (String) -> Unit) {
-        NetworkServiceAdapter.getInstance(application).getArtist(idArtist, {
-            if (it.code() == 200 && it.body() != null) {
-                callBack(it.body()!!)
-            } else {
-                callBack(null)
-            }
-        }, onFailure)
+    suspend fun getArtist(idArtist: Int): LiveData<ArtistaDetalle> {
+        return NetworkServiceAdapter.getInstance(application).getArtist(idArtist)
     }
 
-    fun getBand(idBand: Int, callBack: (ArtistaDetalle?) -> Unit, onFailure: (String) -> Unit) {
-        NetworkServiceAdapter.getInstance(application).getBand(idBand, {
-            if (it.code() == 200 && it.body() != null) {
-                callBack(it.body()!!)
-            } else {
-                callBack(null)
-            }
-        }, onFailure)
+    suspend fun getBand(idBand: Int): LiveData<ArtistaDetalle> {
+        return NetworkServiceAdapter.getInstance(application).getBand(idBand)
     }
 }

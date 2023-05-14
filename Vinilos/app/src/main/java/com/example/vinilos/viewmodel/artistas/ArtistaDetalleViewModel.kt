@@ -6,8 +6,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewModelScope
 import com.example.vinilos.data.artista.ArtistaDetalle
 import com.example.vinilos.data.artista.ArtistaRepository
+import kotlinx.coroutines.CoroutineExceptionHandler
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 
 class ArtistaDetalleViewModel(application: Application, idArtist: Int, esMusico: Boolean) : AndroidViewModel(application) {
@@ -29,27 +34,44 @@ class ArtistaDetalleViewModel(application: Application, idArtist: Int, esMusico:
     val isNetworkErrorShown: LiveData<Boolean>
         get() = _isNetworkErrorShown
 
+    private val coroutineExceptionHandler = CoroutineExceptionHandler{ _, throwable ->
+        throwable.printStackTrace()
+        _eventNetworkError.postValue(true)
+    }
+
     init {
         refreshDataFromNetwork(idArtist, esMusico)
     }
 
     private fun refreshDataFromNetwork(idArtist: Int, esMusico: Boolean) {
         if(esMusico) {
-            artistaRepository.getArtist(idArtist, {
-                _artista.postValue(it)
-                _eventNetworkError.value = false
-                _isNetworkErrorShown.value = false
-            }, {
-                _eventNetworkError.value = true
-            })
+            try{
+                viewModelScope.launch(Dispatchers.Default + coroutineExceptionHandler) {
+                    withContext(Dispatchers.IO) {
+                        val data = artistaRepository.getArtist(idArtist).value
+                        _artista.postValue(data)
+                    }
+                    _eventNetworkError.postValue(false)
+                    _isNetworkErrorShown.postValue(false)
+                }
+            }
+            catch (e: Exception){
+                _eventNetworkError.postValue(true)
+            }
         } else {
-            artistaRepository.getBand(idArtist, {
-                _artista.postValue(it)
-                _eventNetworkError.value = false
-                _isNetworkErrorShown.value = false
-            }, {
-                _eventNetworkError.value = true
-            })
+            try{
+                viewModelScope.launch(Dispatchers.Default + coroutineExceptionHandler) {
+                    withContext(Dispatchers.IO) {
+                        val data = artistaRepository.getBand(idArtist).value
+                        _artista.postValue(data)
+                    }
+                    _eventNetworkError.postValue(false)
+                    _isNetworkErrorShown.postValue(false)
+                }
+            }
+            catch (e: Exception){
+                _eventNetworkError.postValue(true)
+            }
         }
     }
 

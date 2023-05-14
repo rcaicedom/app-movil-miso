@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.example.vinilos.data.album.Album
 import com.example.vinilos.data.album.AlbumRepository
+import kotlinx.coroutines.CoroutineExceptionHandler
 import java.lang.Exception
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -34,24 +35,28 @@ class AlbumViewModel(application: Application) : AndroidViewModel(application) {
     val isNetworkErrorShown: LiveData<Boolean>
         get() = _isNetworkErrorShown
 
+    private val coroutineExceptionHandler = CoroutineExceptionHandler{ _, throwable ->
+        throwable.printStackTrace()
+        _eventNetworkError.postValue(true)
+    }
+
     init {
         refreshDataFromNetwork()
     }
 
     private fun refreshDataFromNetwork() {
         try {
-            viewModelScope.launch(Dispatchers.Default) {
+            viewModelScope.launch(Dispatchers.Default + coroutineExceptionHandler) {
                 withContext(Dispatchers.IO) {
-                    val data = albumRepository.refreshData()
-                    _albums.postValue(data.value)
+                    _albums.postValue(albumRepository.refreshData())
                 }
+                _eventNetworkError.postValue(false)
+                _isNetworkErrorShown.postValue(false)
             }
-            _eventNetworkError.value = false
-            _isNetworkErrorShown.value = false
         }
         catch (e: Exception){
             Log.d("Error", e.toString())
-            _eventNetworkError.value = true
+            _eventNetworkError.postValue(true)
         }
     }
 

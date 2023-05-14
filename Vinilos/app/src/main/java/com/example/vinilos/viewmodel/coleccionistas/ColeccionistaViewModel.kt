@@ -6,8 +6,14 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewModelScope
 import com.example.vinilos.data.coleccionista.Coleccionista
 import com.example.vinilos.data.coleccionista.ColeccionistaRepository
+import kotlinx.coroutines.CoroutineExceptionHandler
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import java.lang.IllegalArgumentException
 
 class ColeccionistaViewModel(application: Application):  AndroidViewModel(application) {
 
@@ -25,18 +31,29 @@ class ColeccionistaViewModel(application: Application):  AndroidViewModel(applic
     val isNetworkErrorShown: LiveData<Boolean>
         get() = _isNetworkErrorShown
 
+    private val coroutineExceptionHandler = CoroutineExceptionHandler{ _, throwable ->
+        throwable.printStackTrace()
+        _eventNetworkError.postValue(true)
+    }
+
     init {
         refreshDataFromNetwork()
     }
 
     private fun refreshDataFromNetwork(){
-        coleccionistaRepository.refreshData({
-            _coleccionistas.postValue(it)
-            _eventNetworkError.value = false
-            _isNetworkErrorShown.value = false
-        }, {
-            _eventNetworkError.value = true
-        })
+        try{
+            viewModelScope.launch(Dispatchers.Default + coroutineExceptionHandler) {
+                withContext(Dispatchers.IO) {
+                    val data = coleccionistaRepository.refreshData().value
+                    _coleccionistas.postValue(data)
+                }
+                _eventNetworkError.postValue(false)
+                _isNetworkErrorShown.postValue(false)
+            }
+        }
+        catch (e:Exception){
+            _eventNetworkError.postValue(true)
+        }
     }
 
     fun onNetworkErrorShown(){
