@@ -3,7 +3,6 @@ package com.example.vinilos.network
 import android.content.Context
 import com.example.vinilos.data.album.Album
 import com.example.vinilos.data.album.AlbumDetalle
-import com.example.vinilos.data.artista.Artista
 import com.example.vinilos.data.artista.ArtistaDetalle
 import com.example.vinilos.data.coleccionista.Coleccionista
 import com.example.vinilos.data.coleccionista.ColeccionistaDetalle
@@ -138,6 +137,10 @@ class NetworkServiceAdapter constructor(context: Context) {
             override fun onFailure(call: Call<List<Artista>>, t: Throwable) {
                 onFailure("No se encontraron bandas, intente mas tarde")
             }
+<<<<<<< HEAD
+=======
+
+>>>>>>> develop
             override fun onResponse(call: Call<List<Artista>>, response: Response<List<Artista>>) {
                 onResponse(response)
             }

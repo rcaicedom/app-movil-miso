@@ -11,11 +11,14 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.vinilos.R
 import com.example.vinilos.data.album.Album
+import com.example.vinilos.data.album.AlbumColeccionista
 import com.example.vinilos.data.artista.Artista
 import com.example.vinilos.data.premio.Premio
 import com.example.vinilos.databinding.ActivityArtistaDetalleBinding
 import com.example.vinilos.ui.album.AlbumesAdapter
+import com.example.vinilos.ui.album.AlbumesColeccionistaAdapter
 import com.example.vinilos.ui.premio.PremiosAdapter
 import com.example.vinilos.viewmodel.artistas.ArtistaDetalleViewModel
 import com.squareup.picasso.Picasso

@@ -2,6 +2,7 @@ package com.example.vinilos.data.artista
 
 import android.app.Application
 import com.example.vinilos.network.NetworkServiceAdapter
+import com.example.vinilos.data.premio.Premio
 
 class ArtistaRepository(private val application: Application) {
 
@@ -15,9 +16,9 @@ class ArtistaRepository(private val application: Application) {
         }, onFailure)
     }
 
-    fun getBands(callback: (List<Artista>) -> Unit, onFailure: (String) -> Unit) {
+    fun getBands(callback: (List<Artista>) -> Unit,onFailure: (String) -> Unit) {
         NetworkServiceAdapter.getInstance(application).getBands({
-            if (it.code() == 200 && it.body() != null) {
+            if (it.code() == 200 && it.body() != null){
                 callback(it.body()!!)
             } else {
                 callback(emptyList())
