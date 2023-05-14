@@ -46,7 +46,7 @@ class ColeccionistaDetalleViewModel(application: Application, idCollector: Int) 
         try{
             viewModelScope.launch(Dispatchers.Default + coroutineExceptionHandler) {
                 withContext(Dispatchers.IO) {
-                    val data = coleccionistaRepository.getCollector(idCollector).value
+                    val data = coleccionistaRepository.getCollector(idCollector)
                     _coleccionista.postValue(data)
                 }
                 _eventNetworkError.postValue(false)

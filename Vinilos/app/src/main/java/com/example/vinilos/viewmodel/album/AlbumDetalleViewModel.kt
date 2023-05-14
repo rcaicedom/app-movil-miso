@@ -47,7 +47,7 @@ class AlbumDetalleViewModel(application: Application, idAlbum: Int) : AndroidVie
         try{
             viewModelScope.launch(Dispatchers.Default + coroutineExceptionHandler) {
                 withContext(Dispatchers.IO) {
-                    val data = albumRepository.getAlbum(idAlbum).value
+                    val data = albumRepository.getAlbum(idAlbum)
                     _album.postValue(data)
                 }
                 _eventNetworkError.postValue(false)

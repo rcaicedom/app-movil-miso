@@ -48,7 +48,7 @@ class ArtistaDetalleViewModel(application: Application, idArtist: Int, esMusico:
             try{
                 viewModelScope.launch(Dispatchers.Default + coroutineExceptionHandler) {
                     withContext(Dispatchers.IO) {
-                        val data = artistaRepository.getArtist(idArtist).value
+                        val data = artistaRepository.getArtist(idArtist)
                         _artista.postValue(data)
                     }
                     _eventNetworkError.postValue(false)
@@ -62,7 +62,7 @@ class ArtistaDetalleViewModel(application: Application, idArtist: Int, esMusico:
             try{
                 viewModelScope.launch(Dispatchers.Default + coroutineExceptionHandler) {
                     withContext(Dispatchers.IO) {
-                        val data = artistaRepository.getBand(idArtist).value
+                        val data = artistaRepository.getBand(idArtist)
                         _artista.postValue(data)
                     }
                     _eventNetworkError.postValue(false)

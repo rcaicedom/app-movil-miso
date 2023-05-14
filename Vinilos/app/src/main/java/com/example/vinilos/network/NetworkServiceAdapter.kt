@@ -94,18 +94,18 @@ class NetworkServiceAdapter constructor(context: Context) {
         })
     }
 
-    suspend fun getAlbum( idAlbum: Int) = suspendCoroutine<LiveData<AlbumDetalle>> {
-        val data = MutableLiveData<AlbumDetalle>()
+    suspend fun getAlbum( idAlbum: Int) = suspendCoroutine<AlbumDetalle?> {
+        var data : AlbumDetalle?
         retrofitApiInterface.getAlbum(idAlbum).enqueue(object : Callback<AlbumDetalle> {
             override fun onFailure(call: Call<AlbumDetalle>, t: Throwable) {
                 it.resumeWithException(t)
             }
 
             override fun onResponse(call: Call<AlbumDetalle>, response: Response<AlbumDetalle>) {
-                if (response.code() == 200 && response.body() != null) {
-                    data.value = response.body()!!
+                data = if (response.code() == 200 && response.body() != null) {
+                    response.body()!!
                 } else {
-                    data.value = null
+                    null
                 }
                 it.resume(data)
             }
@@ -130,18 +130,18 @@ class NetworkServiceAdapter constructor(context: Context) {
         })
     }
 
-    suspend fun getCollector(idCollector: Int) = suspendCoroutine<LiveData<ColeccionistaDetalle>> {
-        val data = MutableLiveData<ColeccionistaDetalle>()
+    suspend fun getCollector(idCollector: Int) = suspendCoroutine<ColeccionistaDetalle?> {
+        var data : ColeccionistaDetalle?
         retrofitApiInterface.getCollector(idCollector).enqueue(object : Callback<ColeccionistaDetalle> {
             override fun onFailure(call: Call<ColeccionistaDetalle>, t: Throwable) {
                 it.resumeWithException(t)
             }
 
             override fun onResponse(call: Call<ColeccionistaDetalle>, response: Response<ColeccionistaDetalle>) {
-                if (response.code() == 200 && response.body() != null) {
-                    data.value = response.body()!!
+                data = if (response.code() == 200 && response.body() != null) {
+                    response.body()!!
                 } else {
-                    data.value = null
+                    null
                 }
                 it.resume(data)
             }
@@ -165,36 +165,36 @@ class NetworkServiceAdapter constructor(context: Context) {
         })
     }
 
-    suspend fun getArtist(idMusician: Int) = suspendCoroutine<LiveData<ArtistaDetalle>> {
-        val data = MutableLiveData<ArtistaDetalle>()
+    suspend fun getArtist(idMusician: Int) = suspendCoroutine<ArtistaDetalle?> {
+        var data : ArtistaDetalle?
         retrofitApiInterface.getArtist(idMusician).enqueue(object : Callback<ArtistaDetalle> {
             override fun onFailure(call: Call<ArtistaDetalle>, t: Throwable) {
                 it.resumeWithException(t)
             }
 
             override fun onResponse(call: Call<ArtistaDetalle>, response: Response<ArtistaDetalle>) {
-                if (response.code() == 200 && response.body() != null) {
-                    data.value = response.body()!!
+                data = if (response.code() == 200 && response.body() != null) {
+                    response.body()!!
                 } else {
-                    data.value = null
+                    null
                 }
                 it.resume(data)
             }
         })
     }
 
-    suspend fun getBand(idBand: Int) = suspendCoroutine<LiveData<ArtistaDetalle>> {
-        val data = MutableLiveData<ArtistaDetalle>()
+    suspend fun getBand(idBand: Int) = suspendCoroutine<ArtistaDetalle?> {
+        var data : ArtistaDetalle?
         retrofitApiInterface.getBand(idBand).enqueue(object : Callback<ArtistaDetalle> {
             override fun onFailure(call: Call<ArtistaDetalle>, t: Throwable) {
                 it.resumeWithException(t)
             }
 
             override fun onResponse(call: Call<ArtistaDetalle>, response: Response<ArtistaDetalle>) {
-                if (response.code() == 200 && response.body() != null) {
-                    data.value = response.body()!!
+                data = if (response.code() == 200 && response.body() != null) {
+                    response.body()!!
                 } else {
-                    data.value = null
+                    null
                 }
                 it.resume(data)
             }
