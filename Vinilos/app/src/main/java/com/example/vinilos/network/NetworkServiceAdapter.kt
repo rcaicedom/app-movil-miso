@@ -138,7 +138,6 @@ class NetworkServiceAdapter constructor(context: Context) {
             override fun onFailure(call: Call<List<Artista>>, t: Throwable) {
                 onFailure("No se encontraron bandas, intente mas tarde")
             }
-
             override fun onResponse(call: Call<List<Artista>>, response: Response<List<Artista>>) {
                 onResponse(response)
             }
