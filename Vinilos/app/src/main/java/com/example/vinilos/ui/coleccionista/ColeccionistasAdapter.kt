@@ -9,9 +9,7 @@ import android.widget.TextView
 import androidx.core.app.ActivityCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.vinilos.R
-import com.example.vinilos.data.artista.Artista
 import com.example.vinilos.data.coleccionista.Coleccionista
-import com.example.vinilos.ui.album.AlbumDetalleActivity
 
 class ColeccionistasAdapter(private val contexto: ColeccionistasActivity): RecyclerView.Adapter<ColeccionistasAdapter.ColeccionistaViewHolder>() {
     private var data: ArrayList<Coleccionista>? = null

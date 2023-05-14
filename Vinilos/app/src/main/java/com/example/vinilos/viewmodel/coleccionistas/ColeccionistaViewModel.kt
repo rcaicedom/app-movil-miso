@@ -8,7 +8,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.vinilos.data.coleccionista.Coleccionista
 import com.example.vinilos.data.coleccionista.ColeccionistaRepository
-import java.lang.IllegalArgumentException
 
 class ColeccionistaViewModel(application: Application):  AndroidViewModel(application) {
 

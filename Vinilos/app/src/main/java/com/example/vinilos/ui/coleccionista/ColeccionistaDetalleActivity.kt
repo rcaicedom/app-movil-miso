@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.vinilos.data.album.AlbumColeccionista
 import com.example.vinilos.data.artista.Artista
-import com.example.vinilos.data.coleccionista.ColeccionistaDetalle
 import com.example.vinilos.databinding.ActivityColeccionistaDetalleBinding
 import com.example.vinilos.ui.album.AlbumesColeccionistaAdapter
 import com.example.vinilos.ui.artistas.ArtistasAdapter
