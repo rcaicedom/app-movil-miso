@@ -8,7 +8,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.vinilos.data.artista.Artista
 import com.example.vinilos.data.artista.ArtistaRepository
-import java.lang.IllegalArgumentException
 
 class ArtistaViewModel(application: Application) : AndroidViewModel(application){
   private val artistaRepository =  ArtistaRepository(application)

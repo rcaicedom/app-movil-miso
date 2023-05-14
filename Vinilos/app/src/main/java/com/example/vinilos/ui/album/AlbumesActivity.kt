@@ -19,7 +19,7 @@ import com.example.vinilos.ui.coleccionista.ColeccionistasActivity
 import com.example.vinilos.viewmodel.album.AlbumViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
-class AlbumesActivity: AppCompatActivity() {
+class AlbumesActivity : AppCompatActivity() {
 
     private lateinit var albumesBinding: ActivityAlbumesBinding
     private lateinit var viewModel: AlbumViewModel
@@ -30,27 +30,30 @@ class AlbumesActivity: AppCompatActivity() {
     private lateinit var navigation: BottomNavigationView
     private lateinit var albumesVacios: TextView
 
-    override fun onCreate(savedInstanceState: Bundle?){
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         albumesBinding = ActivityAlbumesBinding.inflate(layoutInflater)
         setContentView(albumesBinding.root)
         recycler = findViewById(R.id.recyclerAlbumes)
         adapter = AlbumesAdapter(this)
-        recycler.layoutManager = GridLayoutManager(this,2)
+        recycler.layoutManager = GridLayoutManager(this, 2)
         recycler.adapter = adapter
         esColeccionista = intent.getBooleanExtra("COLECCIONISTA", false)
         anadirButton = albumesBinding.agregarAlbumButton
         anadirButton.isEnabled = false
-        if (!esColeccionista){
+        if (!esColeccionista) {
             anadirButton.visibility = View.GONE
         }
         albumesVacios = albumesBinding.textAlbumesVacios
         navigation = albumesBinding.albumesBottomNavigation
         navigation.selectedItemId = R.id.albumes
 
-        viewModel = ViewModelProvider(this, AlbumViewModel.Factory(application)).get(AlbumViewModel::class.java)
+        viewModel = ViewModelProvider(
+            this,
+            AlbumViewModel.Factory(application)
+        ).get(AlbumViewModel::class.java)
         viewModel.albums.observe(this) {
-            if(it.isNotEmpty()) {
+            if (it.isNotEmpty()) {
                 recycler.visibility = View.VISIBLE
                 adapter.setData(it as ArrayList<Album>)
                 albumesVacios.visibility = View.GONE
@@ -66,23 +69,23 @@ class AlbumesActivity: AppCompatActivity() {
             when (it.itemId) {
                 R.id.artistas -> {
                     intent = Intent(this, ArtistasActivity::class.java)
-                    intent.flags =Intent.FLAG_ACTIVITY_REORDER_TO_FRONT
+                    intent.flags = Intent.FLAG_ACTIVITY_REORDER_TO_FRONT
                     ActivityCompat.startActivity(
                         this,
                         intent,
                         null
-                    );
+                    )
                     true
                 }
 
                 R.id.coleccionistas -> {
                     intent = Intent(this, ColeccionistasActivity::class.java)
-                    intent.flags =Intent.FLAG_ACTIVITY_REORDER_TO_FRONT
+                    intent.flags = Intent.FLAG_ACTIVITY_REORDER_TO_FRONT
                     ActivityCompat.startActivity(
                         this,
                         intent,
                         null
-                    );
+                    )
                     true
                 }
 
@@ -99,7 +102,7 @@ class AlbumesActivity: AppCompatActivity() {
     }
 
     private fun onNetworkError() {
-        if(!viewModel.isNetworkErrorShown.value!!) {
+        if (!viewModel.isNetworkErrorShown.value!!) {
             Toast.makeText(this, "Network Error", Toast.LENGTH_LONG).show()
             viewModel.onNetworkErrorShown()
             albumesVacios.text = "Error de conexion"

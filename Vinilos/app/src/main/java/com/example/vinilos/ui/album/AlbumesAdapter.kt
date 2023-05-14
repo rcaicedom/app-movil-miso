@@ -50,7 +50,7 @@ class AlbumesAdapter(private val contexto: AppCompatActivity) :
             val image: ImageView = itemView.findViewById(R.id.albumIconImage)
             Picasso.get().load(item?.cover).error(R.drawable.vinyl).into(image)
 
-            val layout: LinearLayout =itemView.findViewById(R.id.albumIconLayout)
+            val layout: LinearLayout = itemView.findViewById(R.id.albumIconLayout)
             layout.setOnClickListener {
                 val intent = Intent(contexto, AlbumDetalleActivity::class.java)
                 intent.putExtra("ID-ALBUM", item?.id)
