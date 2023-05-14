@@ -2,6 +2,7 @@ package com.example.vinilos.network
 
 import com.example.vinilos.data.album.Album
 import com.example.vinilos.data.album.AlbumDetalle
+import com.example.vinilos.data.artista.Artista
 import com.example.vinilos.data.artista.ArtistaDetalle
 import com.example.vinilos.data.coleccionista.Coleccionista
 import com.example.vinilos.data.coleccionista.ColeccionistaDetalle

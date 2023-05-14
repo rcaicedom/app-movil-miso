@@ -2,7 +2,6 @@ package com.example.vinilos.data.artista
 
 import android.app.Application
 import com.example.vinilos.network.NetworkServiceAdapter
-import com.example.vinilos.data.premio.Premio
 
 class ArtistaRepository(private val application: Application) {
 
