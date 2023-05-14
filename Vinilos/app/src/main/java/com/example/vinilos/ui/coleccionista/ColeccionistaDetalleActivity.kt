@@ -38,7 +38,7 @@ class ColeccionistaDetalleActivity: AppCompatActivity() {
         coleccionistaName = coleccionistaDetalleBinding.titleColeccionistaDetalle
 
         artistasRecycler = coleccionistaDetalleBinding.coleccionistaArtistasRecycler
-        artistasAdapter = ArtistasAdapter()
+        artistasAdapter = ArtistasAdapter(this)
         artistasRecycler.layoutManager = LinearLayoutManager(this)
         artistasRecycler.adapter = artistasAdapter
         artistasEmptyText = coleccionistaDetalleBinding.artistasEmptyTextColeccionista

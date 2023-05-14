@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="#22223A"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#22223A"
+        android:paddingLeft="16dp"
+        android:paddingTop="16dp"
+        android:paddingRight="16dp"
+        android:paddingBottom="16dp"
+        tools:context=".ui.artista.ArtistaDetalleActivity">
+
+
+        <TextView
+            android:id="@+id/titleArtistaDetalle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="22dp"
+            android:fontFamily="@font/poppins_light"
+            android:textAlignment="center"
+            android:textColor="#FFFFFF"
+            android:textSize="36sp"
+            android:textStyle="normal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/artistaDetalleImagen"
+            android:layout_width="140dp"
+            android:layout_height="140dp"
+            android:layout_marginTop="35dp"
+            android:background="@drawable/artists_border"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/titleArtistaDetalle" />
+
+
+        <TextView
+            android:id="@+id/labelArtistaDetalleFecha"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginStart="20dp"
+
+            android:fontFamily="@font/poppins_light"
+            android:text="@string/fecha_de_nacimiento"
+            android:textAlignment="center"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            android:textStyle="normal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/artistaDetalleImagen" />
+
+        <TextView
+            android:id="@+id/textArtistaDetalleFecha"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginStart="10dp"
+            android:fontFamily="@font/poppins_light"
+            android:textAlignment="center"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            android:textStyle="normal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toEndOf="@+id/labelArtistaDetalleFecha"
+            app:layout_constraintTop_toBottomOf="@+id/artistaDetalleImagen" />
+
+        <TextView
+            android:id="@+id/labelArtistaDetalleDescripcion"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginTop="22dp"
+            android:layout_marginStart="20dp"
+            android:fontFamily="@font/poppins_light"
+            android:text="@string/descripcion"
+            android:textAlignment="center"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            android:textStyle="normal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textArtistaDetalleFecha" />
+
+        <TextView
+            android:id="@+id/textArtistaDetalleDescripcion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="22dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:fontFamily="@font/poppins_light"
+            android:textAlignment="textStart"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            android:textStyle="normal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/labelArtistaDetalleDescripcion" />
+
+        <TextView
+            android:id="@+id/labelArtistaDetalleAlbumes"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginTop="22dp"
+            android:layout_marginStart="20dp"
+            android:fontFamily="@font/poppins_light"
+            android:text="@string/albums"
+            android:textAlignment="center"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            android:textStyle="normal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textArtistaDetalleDescripcion" />
+
+        <LinearLayout
+            android:id="@+id/artistaAlbumesLayout"
+            android:layout_width="356dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="22dp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/labelArtistaDetalleAlbumes">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/artistaAlbumesRecycler"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="parent" />
+
+            <TextView
+                android:id="@+id/albumesEmptyText"
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:visibility="gone"
+                android:textAlignment="center"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp"
+                android:textStyle="normal"
+                android:text="@string/no_hay_albumes_registrados"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="parent"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/labelArtistaDetalleArtistas"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginTop="22dp"
+            android:layout_marginStart="20dp"
+            android:fontFamily="@font/poppins_light"
+            android:text="@string/artistas"
+            android:textAlignment="center"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            android:textStyle="normal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/artistaAlbumesLayout" />
+
+        <LinearLayout
+            android:id="@+id/artistaArtistasLayout"
+            android:layout_width="356dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="22dp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/labelArtistaDetalleArtistas">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/artistaArtistasRecycler"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="parent" />
+
+            <TextView
+                android:id="@+id/artistasEmptyText"
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:visibility="gone"
+                android:textAlignment="center"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp"
+                android:textStyle="normal"
+                android:text="@string/no_hay_artistas_registrados"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="parent"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/labelArtistaDetallePremios"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginTop="22dp"
+            android:layout_marginStart="20dp"
+            android:fontFamily="@font/poppins_light"
+            android:text="@string/premios"
+            android:textAlignment="center"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            android:textStyle="normal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/artistaArtistasLayout" />
+
+        <LinearLayout
+            android:id="@+id/artistaPremiosLayout"
+            android:layout_width="356dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="22dp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/labelArtistaDetallePremios">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/artistaPremiosRecycler"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="parent" />
+
+            <TextView
+                android:id="@+id/premiosEmptyText"
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:visibility="gone"
+                android:textAlignment="center"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp"
+                android:textStyle="normal"
+                android:text="@string/no_hay_premios_registrados"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="parent"
+                />
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

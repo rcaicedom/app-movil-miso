@@ -7,13 +7,14 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.vinilos.R
 import com.example.vinilos.data.album.Album
 import com.squareup.picasso.Picasso
 
-class AlbumesAdapter(private val contexto: AlbumesActivity) :
+class AlbumesAdapter(private val contexto: AppCompatActivity) :
     RecyclerView.Adapter<AlbumesAdapter.AlbumesViewHolder>() {
     private var data: ArrayList<Album>? = null
 
@@ -42,7 +43,7 @@ class AlbumesAdapter(private val contexto: AlbumesActivity) :
     class AlbumesViewHolder(itemView: View) :
         RecyclerView.ViewHolder(itemView) {
 
-        fun bindView(item: Album?, contexto: AlbumesActivity) {
+        fun bindView(item: Album?, contexto: AppCompatActivity) {
             val name: TextView = itemView.findViewById(R.id.albumIconName)
             name.text = item?.name
 
