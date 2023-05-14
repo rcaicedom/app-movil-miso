@@ -58,7 +58,7 @@ class ArtistaDetalleViewModel(application: Application, idArtist: Int, esMusico:
     }
 
     class Factory(val app: Application, private val idArtist: Int, private val esMusico: Boolean) : ViewModelProvider.Factory {
-        override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+        override fun <T : ViewModel> create(modelClass: Class<T>): T {
             if (modelClass.isAssignableFrom(ArtistaDetalleViewModel::class.java)) {
                 @Suppress("UNCHECKED_CAST")
                 return ArtistaDetalleViewModel(app, idArtist, esMusico) as T

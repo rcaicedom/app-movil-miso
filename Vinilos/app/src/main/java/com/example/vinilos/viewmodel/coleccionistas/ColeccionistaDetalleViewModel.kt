@@ -47,7 +47,7 @@ class ColeccionistaDetalleViewModel(application: Application, idCollector: Int) 
     }
 
     class Factory(val app: Application, private val idCollector: Int) : ViewModelProvider.Factory {
-        override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+        override fun <T : ViewModel> create(modelClass: Class<T>): T {
             if (modelClass.isAssignableFrom(ColeccionistaDetalleViewModel::class.java)) {
                 @Suppress("UNCHECKED_CAST")
                 return ColeccionistaDetalleViewModel(app, idCollector) as T

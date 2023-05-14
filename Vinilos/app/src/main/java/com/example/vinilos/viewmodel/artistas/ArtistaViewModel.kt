@@ -6,8 +6,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewModelScope
 import com.example.vinilos.data.artista.Artista
 import com.example.vinilos.data.artista.ArtistaRepository
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import java.lang.IllegalArgumentException
 
 class ArtistaViewModel(application: Application) : AndroidViewModel(application){
   private val artistaRepository =  ArtistaRepository(application)
@@ -28,17 +33,21 @@ class ArtistaViewModel(application: Application) : AndroidViewModel(application)
   }
 
   private fun refreshDataFromNetwork(){
-    artistaRepository.refreshData({
-      artistaRepository.getBands({bands ->
-        _artistas.postValue(it + bands)
-        _eventNetworkError.value = false
-        _isNetworkErrorShown.value = false
-      }, {
-        _eventNetworkError.value = true
-      })
-    }, {
+    try
+      {
+      viewModelScope.launch(Dispatchers.Default) {
+        withContext(Dispatchers.IO) {
+          val data = artistaRepository.refreshData().value
+          val bandas = artistaRepository.getBands().value
+          _artistas.postValue(it + bands)
+          _eventNetworkError.value = false
+          _isNetworkErrorShown.value = false
+        }
+      }
+      }
+    catch (e: Exception){
       _eventNetworkError.value = true
-    })
+    }
   }
 
   fun onNetworkErrorShown(){

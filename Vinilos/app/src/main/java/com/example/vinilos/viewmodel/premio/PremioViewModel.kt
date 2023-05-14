@@ -47,7 +47,7 @@ class PremioViewModel(application: Application, idPremio: Int) : AndroidViewMode
     }
 
     class Factory(val app: Application, private val idPremio: Int) : ViewModelProvider.Factory {
-        override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+        override fun <T : ViewModel> create(modelClass: Class<T>): T {
             if (modelClass.isAssignableFrom(PremioViewModel::class.java)) {
                 @Suppress("UNCHECKED_CAST")
                 return PremioViewModel(app, idPremio) as T
