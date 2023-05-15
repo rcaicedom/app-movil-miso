@@ -1,4 +1,4 @@
-package com.example.vinilos.viewmodel.album
+package com.example.vinilos.viewmodel.premio
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
@@ -7,22 +7,21 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import com.example.vinilos.data.album.AlbumDetalle
-import com.example.vinilos.data.album.AlbumRepository
+import com.example.vinilos.data.premio.Premio
+import com.example.vinilos.data.premio.PremioRepository
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import java.lang.Exception
 
-class AlbumDetalleViewModel(application: Application, idAlbum: Int) : AndroidViewModel(application) {
+class PremioViewModel(application: Application, idPremio: Int) : AndroidViewModel(application) {
 
-    private val albumRepository = AlbumRepository(application)
+    private val premioRepository = PremioRepository(application)
 
-    private val _album = MutableLiveData<AlbumDetalle>()
+    private val _premio = MutableLiveData<Premio>()
 
-    val album: LiveData<AlbumDetalle>
-        get() = _album
+    val premio: LiveData<Premio>
+        get() = _premio
 
     private var _eventNetworkError = MutableLiveData<Boolean>(false)
 
@@ -40,21 +39,21 @@ class AlbumDetalleViewModel(application: Application, idAlbum: Int) : AndroidVie
     }
 
     init {
-        refreshDataFromNetwork(idAlbum)
+        refreshDataFromNetwork(idPremio)
     }
 
-    private fun refreshDataFromNetwork(idAlbum: Int) {
+    private fun refreshDataFromNetwork(idPremio: Int) {
         try{
             viewModelScope.launch(Dispatchers.Default + coroutineExceptionHandler) {
                 withContext(Dispatchers.IO) {
-                    val data = albumRepository.getAlbum(idAlbum)
-                    _album.postValue(data)
+                    val data = premioRepository.getPrize(idPremio).value
+                    _premio.postValue(data)
                 }
                 _eventNetworkError.postValue(false)
                 _isNetworkErrorShown.postValue(false)
             }
         }
-        catch (e: Exception){
+        catch (e:Exception){
             _eventNetworkError.postValue(true)
         }
     }
@@ -63,11 +62,11 @@ class AlbumDetalleViewModel(application: Application, idAlbum: Int) : AndroidVie
         _isNetworkErrorShown.value = true
     }
 
-    class Factory(val app: Application, val idAlbum: Int) : ViewModelProvider.Factory {
+    class Factory(val app: Application, private val idPremio: Int) : ViewModelProvider.Factory {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            if (modelClass.isAssignableFrom(AlbumDetalleViewModel::class.java)) {
+            if (modelClass.isAssignableFrom(PremioViewModel::class.java)) {
                 @Suppress("UNCHECKED_CAST")
-                return AlbumDetalleViewModel(app, idAlbum) as T
+                return PremioViewModel(app, idPremio) as T
             }
             throw IllegalArgumentException("Unable to construct viewmodel")
         }

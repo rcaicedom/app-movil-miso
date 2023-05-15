@@ -1,26 +1,22 @@
 package com.example.vinilos.data.album
 
 import android.app.Application
+import com.example.vinilos.network.CacheManager
 import com.example.vinilos.network.NetworkServiceAdapter
 
 class AlbumRepository(private val application: Application) {
-    fun refreshData(callBack: (List<Album>) -> Unit, onFailure: (String) -> Unit) {
-        NetworkServiceAdapter.getInstance(application).getAlbums({
-            if (it.code() == 200 && it.body() != null) {
-                callBack(it.body()!!)
-            } else {
-                callBack(emptyList())
-            }
-        }, onFailure)
+    suspend fun refreshData(): List<Album> {
+        return NetworkServiceAdapter.getInstance(application).getAlbums()
     }
 
-    fun getAlbum(idAlbum: Int, callBack: (AlbumDetalle?) -> Unit, onFailure: (String) -> Unit) {
-        NetworkServiceAdapter.getInstance(application).getAlbum(idAlbum, {
-            if (it.code() == 200 && it.body() != null) {
-                callBack(it.body()!!)
-            } else {
-                callBack(null)
-            }
-        }, onFailure)
+    suspend fun getAlbum(idAlbum: Int): AlbumDetalle {
+        val potentialResp = CacheManager.getInstance(application.applicationContext).getAlbum(idAlbum)
+        return if(potentialResp == null){
+            val album = NetworkServiceAdapter.getInstance(application).getAlbum(idAlbum)
+            CacheManager.getInstance(application.applicationContext).addAlbum(idAlbum, album!!)
+            album
+        } else {
+            potentialResp
+        }
     }
 }

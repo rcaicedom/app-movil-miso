@@ -1,4 +1,4 @@
-package com.example.vinilos.viewmodel.album
+package com.example.vinilos.viewmodel.coleccionistas
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
@@ -7,22 +7,21 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import com.example.vinilos.data.album.AlbumDetalle
-import com.example.vinilos.data.album.AlbumRepository
+import com.example.vinilos.data.coleccionista.ColeccionistaDetalle
+import com.example.vinilos.data.coleccionista.ColeccionistaRepository
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import java.lang.Exception
 
-class AlbumDetalleViewModel(application: Application, idAlbum: Int) : AndroidViewModel(application) {
+class ColeccionistaDetalleViewModel(application: Application, idCollector: Int) : AndroidViewModel(application) {
 
-    private val albumRepository = AlbumRepository(application)
+    private val coleccionistaRepository = ColeccionistaRepository(application)
 
-    private val _album = MutableLiveData<AlbumDetalle>()
+    private val _coleccionista = MutableLiveData<ColeccionistaDetalle>()
 
-    val album: LiveData<AlbumDetalle>
-        get() = _album
+    val coleccionista: LiveData<ColeccionistaDetalle>
+        get() = _coleccionista
 
     private var _eventNetworkError = MutableLiveData<Boolean>(false)
 
@@ -40,15 +39,15 @@ class AlbumDetalleViewModel(application: Application, idAlbum: Int) : AndroidVie
     }
 
     init {
-        refreshDataFromNetwork(idAlbum)
+        refreshDataFromNetwork(idCollector)
     }
 
-    private fun refreshDataFromNetwork(idAlbum: Int) {
+    private fun refreshDataFromNetwork(idCollector: Int) {
         try{
             viewModelScope.launch(Dispatchers.Default + coroutineExceptionHandler) {
                 withContext(Dispatchers.IO) {
-                    val data = albumRepository.getAlbum(idAlbum)
-                    _album.postValue(data)
+                    val data = coleccionistaRepository.getCollector(idCollector)
+                    _coleccionista.postValue(data)
                 }
                 _eventNetworkError.postValue(false)
                 _isNetworkErrorShown.postValue(false)
@@ -63,11 +62,11 @@ class AlbumDetalleViewModel(application: Application, idAlbum: Int) : AndroidVie
         _isNetworkErrorShown.value = true
     }
 
-    class Factory(val app: Application, val idAlbum: Int) : ViewModelProvider.Factory {
+    class Factory(val app: Application, private val idCollector: Int) : ViewModelProvider.Factory {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            if (modelClass.isAssignableFrom(AlbumDetalleViewModel::class.java)) {
+            if (modelClass.isAssignableFrom(ColeccionistaDetalleViewModel::class.java)) {
                 @Suppress("UNCHECKED_CAST")
-                return AlbumDetalleViewModel(app, idAlbum) as T
+                return ColeccionistaDetalleViewModel(app, idCollector) as T
             }
             throw IllegalArgumentException("Unable to construct viewmodel")
         }

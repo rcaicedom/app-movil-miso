@@ -1,13 +1,20 @@
 package com.example.vinilos.viewmodel.album
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewModelScope
 import com.example.vinilos.data.album.Album
 import com.example.vinilos.data.album.AlbumRepository
+import kotlinx.coroutines.CoroutineExceptionHandler
+import java.lang.Exception
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class AlbumViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -28,18 +35,29 @@ class AlbumViewModel(application: Application) : AndroidViewModel(application) {
     val isNetworkErrorShown: LiveData<Boolean>
         get() = _isNetworkErrorShown
 
+    private val coroutineExceptionHandler = CoroutineExceptionHandler{ _, throwable ->
+        throwable.printStackTrace()
+        _eventNetworkError.postValue(true)
+    }
+
     init {
         refreshDataFromNetwork()
     }
 
     private fun refreshDataFromNetwork() {
-        albumRepository.refreshData({
-            _albums.postValue(it)
-            _eventNetworkError.value = false
-            _isNetworkErrorShown.value = false
-        },{
-            _eventNetworkError.value = true
-        })
+        try {
+            viewModelScope.launch(Dispatchers.Default + coroutineExceptionHandler) {
+                withContext(Dispatchers.IO) {
+                    _albums.postValue(albumRepository.refreshData())
+                }
+                _eventNetworkError.postValue(false)
+                _isNetworkErrorShown.postValue(false)
+            }
+        }
+        catch (e: Exception){
+            Log.d("Error", e.toString())
+            _eventNetworkError.postValue(true)
+        }
     }
 
     fun onNetworkErrorShown() {
@@ -47,7 +65,7 @@ class AlbumViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     class Factory(val app: Application) : ViewModelProvider.Factory {
-        override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+        override fun <T : ViewModel> create(modelClass: Class<T>): T {
             if (modelClass.isAssignableFrom(AlbumViewModel::class.java)) {
                 @Suppress("UNCHECKED_CAST")
                 return AlbumViewModel(app) as T

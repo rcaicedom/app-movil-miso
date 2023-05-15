@@ -1,4 +1,4 @@
-package com.example.vinilos.ui.artistas
+package com.example.vinilos.ui.coleccionista
 
 import android.content.Intent
 import android.os.Bundle
@@ -11,44 +11,44 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.vinilos.R
-import com.example.vinilos.data.artista.Artista
-import com.example.vinilos.databinding.ActivityArtistaBinding
+import com.example.vinilos.data.coleccionista.Coleccionista
+import com.example.vinilos.databinding.ActivityColeccionistasBinding
 import com.example.vinilos.ui.album.AlbumesActivity
-import com.example.vinilos.ui.coleccionista.ColeccionistasActivity
-import com.example.vinilos.viewmodel.artistas.ArtistaViewModel
+import com.example.vinilos.ui.artistas.ArtistasActivity
+import com.example.vinilos.viewmodel.coleccionistas.ColeccionistaViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
+class ColeccionistasActivity: AppCompatActivity() {
 
-class ArtistasActivity : AppCompatActivity() {
-
-    private lateinit var artistaBinding: ActivityArtistaBinding
-    private lateinit var viewModel: ArtistaViewModel
-    private lateinit var adapter: ArtistasAdapter
+    private lateinit var coleccionistasBinding: ActivityColeccionistasBinding
+    private lateinit var viewModel: ColeccionistaViewModel
+    private lateinit var adapter: ColeccionistasAdapter
     private lateinit var recycler: RecyclerView
     private lateinit var navigation: BottomNavigationView
-    private lateinit var artistasVacios: TextView
+    private lateinit var coleccionistasVacios: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        artistaBinding = ActivityArtistaBinding.inflate(layoutInflater)
-        setContentView(artistaBinding.root)
-        recycler = findViewById(R.id.artistasRecycler)
-        adapter = ArtistasAdapter(this)
+        coleccionistasBinding = ActivityColeccionistasBinding.inflate(layoutInflater)
+        setContentView(coleccionistasBinding.root)
+        recycler = findViewById(R.id.coleccionistasRecycler)
+        adapter = ColeccionistasAdapter(this)
         recycler.layoutManager = LinearLayoutManager(this)
         recycler.adapter = adapter
 
-        navigation = artistaBinding.artistasBottomNavigation
-        navigation.selectedItemId = R.id.artistas
-        artistasVacios = artistaBinding.textArtistasVacios
+        navigation = coleccionistasBinding.coleccionistasBottomNavigation
+        navigation.selectedItemId = R.id.coleccionistas
+        coleccionistasVacios = coleccionistasBinding.textColeccionistasVacios
 
-        viewModel = ViewModelProvider(this, ArtistaViewModel.Factory(application)).get(ArtistaViewModel::class.java)
-        viewModel.artistas.observe(this) {
+        viewModel = ViewModelProvider(this, ColeccionistaViewModel.Factory(application)).get(
+            ColeccionistaViewModel::class.java)
+        viewModel.coleccionistas.observe(this) {
             if(it.isNotEmpty()){
                 recycler.visibility = View.VISIBLE
-                adapter.setData(it as ArrayList<Artista>)
-                artistasVacios.visibility = View.GONE
+                adapter.setData(it as ArrayList<Coleccionista>)
+                coleccionistasVacios.visibility = View.GONE
             } else {
-                artistasVacios.visibility = View.VISIBLE
+                coleccionistasVacios.visibility = View.VISIBLE
             }
         }
         viewModel.eventNetworkError.observe(this) { isNetworkError ->
@@ -57,7 +57,7 @@ class ArtistasActivity : AppCompatActivity() {
 
         navigation.setOnNavigationItemSelectedListener {
             when (it.itemId) {
-                R.id.artistas -> true
+                R.id.coleccionistas -> true
                 R.id.albumes -> {
                     intent = Intent(this, AlbumesActivity::class.java)
                     intent.flags =Intent.FLAG_ACTIVITY_REORDER_TO_FRONT
@@ -68,8 +68,8 @@ class ArtistasActivity : AppCompatActivity() {
                     );
                     true
                 }
-                R.id.coleccionistas -> {
-                    intent = Intent(this, ColeccionistasActivity::class.java)
+                R.id.artistas -> {
+                    intent = Intent(this, ArtistasActivity::class.java)
                     intent.flags =Intent.FLAG_ACTIVITY_REORDER_TO_FRONT
                     ActivityCompat.startActivity(
                         this,
@@ -85,14 +85,14 @@ class ArtistasActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        navigation.selectedItemId = R.id.artistas
+        navigation.selectedItemId = R.id.coleccionistas
     }
     private fun onNetworkError() {
         if(!viewModel.isNetworkErrorShown.value!!) {
             Toast.makeText(this, "Error de conexion", Toast.LENGTH_LONG).show()
             viewModel.onNetworkErrorShown()
-            artistasVacios.text = "Error de conexion"
-            artistasVacios.visibility = View.VISIBLE
+            coleccionistasVacios.text = "Error de conexion"
+            coleccionistasVacios.visibility = View.VISIBLE
         }
     }
 }

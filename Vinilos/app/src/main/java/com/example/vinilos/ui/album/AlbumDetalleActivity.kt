@@ -18,7 +18,7 @@ import com.example.vinilos.ui.track.TracksAdapter
 import com.example.vinilos.viewmodel.album.AlbumDetalleViewModel
 import com.squareup.picasso.Picasso
 
-class AlbumDetalleActivity: AppCompatActivity() {
+class AlbumDetalleActivity : AppCompatActivity() {
 
     private lateinit var albumDetalleBinding: ActivityAlbumDetalleBinding
     private lateinit var viewModel: AlbumDetalleViewModel
@@ -36,7 +36,7 @@ class AlbumDetalleActivity: AppCompatActivity() {
     private lateinit var tracksRecycler: RecyclerView
     private lateinit var tracksEmptyText: TextView
 
-    override fun onCreate(savedInstanceState: Bundle?){
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         albumDetalleBinding = ActivityAlbumDetalleBinding.inflate(layoutInflater)
         setContentView(albumDetalleBinding.root)
@@ -49,7 +49,7 @@ class AlbumDetalleActivity: AppCompatActivity() {
         albumCasa = albumDetalleBinding.textAlbumDetalleCasa
 
         artistasRecycler = albumDetalleBinding.albumArtistasRecycler
-        artistasAdapter = ArtistasAdapter()
+        artistasAdapter = ArtistasAdapter(this)
         artistasRecycler.layoutManager = LinearLayoutManager(this)
         artistasRecycler.adapter = artistasAdapter
         artistasEmptyText = albumDetalleBinding.artistasEmptyText
@@ -60,9 +60,12 @@ class AlbumDetalleActivity: AppCompatActivity() {
         tracksRecycler.adapter = tracksAdapter
         tracksEmptyText = albumDetalleBinding.tracksEmptyText
 
-        viewModel = ViewModelProvider(this, AlbumDetalleViewModel.Factory(application, idAlbum)).get(AlbumDetalleViewModel::class.java)
+        viewModel =
+            ViewModelProvider(this, AlbumDetalleViewModel.Factory(application, idAlbum)).get(
+                AlbumDetalleViewModel::class.java
+            )
         viewModel.album.observe(this) {
-            if(it!=null){
+            if (it != null) {
                 albumTitle.text = it.name
                 Picasso.get().load(it.cover).error(R.drawable.vinyl).into(albumImagen)
                 albumFecha.text = it.releaseDate.split("T")[0]
@@ -70,7 +73,7 @@ class AlbumDetalleActivity: AppCompatActivity() {
                 albumGenero.text = it.genre
                 albumCasa.text = it.recordLabel
 
-                if(it.performers.isNotEmpty()) {
+                if (it.performers.isNotEmpty()) {
                     artistasEmptyText.visibility = View.GONE
                     artistasRecycler.visibility = View.VISIBLE
                     artistasAdapter.setData(it.performers as ArrayList<Artista>)
@@ -79,7 +82,7 @@ class AlbumDetalleActivity: AppCompatActivity() {
                     artistasEmptyText.visibility = View.VISIBLE
                 }
 
-                if(it.tracks.isNotEmpty()) {
+                if (it.tracks.isNotEmpty()) {
                     tracksEmptyText.visibility = View.GONE
                     tracksRecycler.visibility = View.VISIBLE
                     tracksAdapter.setData(it.tracks as ArrayList<Track>)
@@ -87,8 +90,7 @@ class AlbumDetalleActivity: AppCompatActivity() {
                     tracksRecycler.visibility = View.GONE
                     tracksEmptyText.visibility = View.VISIBLE
                 }
-            }
-            else {
+            } else {
                 albumTitle.text = idAlbum.toString()
             }
         }
@@ -98,7 +100,7 @@ class AlbumDetalleActivity: AppCompatActivity() {
     }
 
     private fun onNetworkError() {
-        if(!viewModel.isNetworkErrorShown.value!!) {
+        if (!viewModel.isNetworkErrorShown.value!!) {
             Toast.makeText(this, "Network Error", Toast.LENGTH_LONG).show()
             viewModel.onNetworkErrorShown()
         }
