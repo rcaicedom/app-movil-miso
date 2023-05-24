@@ -21,13 +21,4 @@ class ColeccionistaRepository(private val application: Application) {
             potentialResp
         }
     }
-    fun getCollector(idCollector: Int, callBack: (ColeccionistaDetalle?) -> Unit, onFailure: (String) -> Unit) {
-        NetworkServiceAdapter.getInstance(application).getCollector(idCollector, {
-            if (it.code() == 200 && it.body() != null) {
-                callBack(it.body()!!)
-            } else {
-                callBack(null)
-            }
-        }, onFailure)
-    }
 }

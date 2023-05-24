@@ -49,6 +49,10 @@
             android:name=".ui.artistas.ArtistaDetalleActivity"
             android:exported="true">
         </activity>
+        <activity
+            android:name=".ui.album.AlbumCreateActivity"
+            android:exported="true">
+        </activity>
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
