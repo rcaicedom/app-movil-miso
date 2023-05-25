@@ -16,10 +16,10 @@ import com.squareup.picasso.Picasso
 
 class AlbumesAdapter(private val contexto: AppCompatActivity) :
     RecyclerView.Adapter<AlbumesAdapter.AlbumesViewHolder>() {
-    private var data: ArrayList<Album>? = null
+    var dataAdapter: ArrayList<Album>? = null
 
     fun setData(list: ArrayList<Album>) {
-        data = list
+        dataAdapter = list
     }
 
     override fun onCreateViewHolder(
@@ -31,11 +31,11 @@ class AlbumesAdapter(private val contexto: AppCompatActivity) :
     }
 
     override fun getItemCount(): Int {
-        return data?.size ?: 0
+        return dataAdapter?.size ?: 0
     }
 
     override fun onBindViewHolder(holder: AlbumesViewHolder, position: Int) {
-        val item = data?.get(position)
+        val item = dataAdapter?.get(position)
         holder.bindView(item, contexto)
 
     }

@@ -38,4 +38,7 @@ interface RetrofitApiInterface {
 
     @GET("/prizes/{idPrize}")
     fun getPrize(@Path("idPrize") idPrize: Int): Call<Premio>
+
+    @POST("/albums")
+    fun createAlbum(@Body body: Album): Call<Album?>
 }

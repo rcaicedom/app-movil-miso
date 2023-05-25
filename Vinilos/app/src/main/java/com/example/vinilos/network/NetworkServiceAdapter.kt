@@ -218,4 +218,19 @@ class NetworkServiceAdapter constructor(context: Context) {
             }
         })
     }
+
+    suspend fun createAlbum( album: Album) = suspendCoroutine {
+        var data : Boolean
+        retrofitApiInterface.createAlbum(album).enqueue(object : Callback<Album?> {
+            override fun onFailure(call: Call<Album?>, t: Throwable) {
+                it.resumeWithException(t)
+            }
+
+            override fun onResponse(call: Call<Album?>, response: Response<Album?>) {
+
+                data = response.code() == 200 && response.body() != null
+                it.resume(data)
+            }
+        })
+    }
 }
