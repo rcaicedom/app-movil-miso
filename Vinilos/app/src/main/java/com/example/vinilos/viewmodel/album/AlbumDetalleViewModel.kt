@@ -43,7 +43,7 @@ class AlbumDetalleViewModel(application: Application, idAlbum: Int) : AndroidVie
         refreshDataFromNetwork(idAlbum)
     }
 
-    private fun refreshDataFromNetwork(idAlbum: Int) {
+    fun refreshDataFromNetwork(idAlbum: Int) {
         try{
             viewModelScope.launch(Dispatchers.Default + coroutineExceptionHandler) {
                 withContext(Dispatchers.IO) {

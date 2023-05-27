@@ -203,6 +203,9 @@ class AlbumCreateActivity : AppCompatActivity(), DatePickerFragment.dateSelected
                 ).show()
             }
         }
+        vm.eventNetworkError.observe(this) { isNetworkError ->
+            if (isNetworkError) onNetworkError()
+        }
     }
 
     override fun dateSelected(year: Int, month: Int, day: Int) {
@@ -216,5 +219,12 @@ class AlbumCreateActivity : AppCompatActivity(), DatePickerFragment.dateSelected
             day1="0"
         }
         textFecha.text = "$year-$month1$month-$day1$day"
+    }
+
+    private fun onNetworkError() {
+        if (!vm.isNetworkErrorShown.value!!) {
+            Toast.makeText(this, "Network Error", Toast.LENGTH_LONG).show()
+            vm.onNetworkErrorShown()
+        }
     }
 }

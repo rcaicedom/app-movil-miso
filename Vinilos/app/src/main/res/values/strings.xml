@@ -30,11 +30,20 @@
     <string name="crear_album">Crear Album</string>
     <string name="nombre">Nombre:</string>
     <string name="cover">Cover:</string>
-    <string name="nombre_del_album">Nombre del album</string>
+    <string name="nombre_del_album">Nombre del album:</string>
     <string name="url_de_la_imagen_cover">URL de la imagen/cover</string>
     <string name="fecha_de_salida_al_mercado2">Fecha de salida al mercado</string>
     <string name="descripcion_del_album">Descripcion del album</string>
     <string name="crear">Crear</string>
+    <string name="album">Album:</string>
+    <string name="asociar_track_a_album">Asociar track a album</string>
+    <string name="asociar">Asociar</string>
+    <string name="track">Track</string>
+    <string name="nombre_del_track">Nombre del Track:</string>
+    <string name="duracion">Duracion:</string>
+    <string name="duracion_del_track">Duracion del track</string>
+    <string name="asociar_track">Asociar Track</string>
+    <string name="duracion_del_track_en_segundos">Duracion del track en segundos:</string>
 
     <string-array name="generos">
         <item>Classical</item>

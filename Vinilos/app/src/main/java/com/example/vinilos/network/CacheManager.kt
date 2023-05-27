@@ -31,6 +31,12 @@ class CacheManager(context: Context) {
         return if (albums[albumId]!=null) albums[albumId]!! else null
     }
 
+    fun removeAlbum(albumId: Int) {
+        if(albums[albumId] != null){
+            albums.remove(albumId)
+        }
+    }
+
     fun addArtist(artistId: Int, artist: ArtistaDetalle){
         if (artists[artistId] == null){
             artists.put(artistId, artist)
