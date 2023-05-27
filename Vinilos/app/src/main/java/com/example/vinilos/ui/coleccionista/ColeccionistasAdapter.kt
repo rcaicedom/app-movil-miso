@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.vinilos.R
 import com.example.vinilos.data.coleccionista.Coleccionista
 
-class ColeccionistasAdapter(private val contexto: ColeccionistasActivity, private val esColeccionista: Boolean): RecyclerView.Adapter<ColeccionistasAdapter.ColeccionistaViewHolder>() {
+class ColeccionistasAdapter(private val contexto: ColeccionistasActivity): RecyclerView.Adapter<ColeccionistasAdapter.ColeccionistaViewHolder>() {
     private var data: ArrayList<Coleccionista>? = null
 
     fun setData(list: ArrayList<Coleccionista>) {
@@ -22,7 +22,7 @@ class ColeccionistasAdapter(private val contexto: ColeccionistasActivity, privat
         parent: ViewGroup, viewType: Int
     ): ColeccionistaViewHolder {
         return ColeccionistaViewHolder(
-            LayoutInflater.from(parent.context).inflate(R.layout.coleccionista_icon, parent, false), contexto, esColeccionista
+            LayoutInflater.from(parent.context).inflate(R.layout.coleccionista_icon, parent, false), contexto
         )
     }
 
@@ -36,7 +36,7 @@ class ColeccionistasAdapter(private val contexto: ColeccionistasActivity, privat
 
     }
 
-    class ColeccionistaViewHolder(itemView: View, private val contexto: ColeccionistasActivity, private val esColeccionista: Boolean) :
+    class ColeccionistaViewHolder(itemView: View, private val contexto: ColeccionistasActivity) :
         RecyclerView.ViewHolder(itemView) {
 
         fun bindView(item: Coleccionista?) {
@@ -47,7 +47,6 @@ class ColeccionistasAdapter(private val contexto: ColeccionistasActivity, privat
             boton.setOnClickListener {
                 val intent = Intent(contexto, ColeccionistaDetalleActivity::class.java)
                 intent.putExtra("ID-COLECCIONISTA", item?.id)
-                intent.putExtra("COLECCIONISTA", esColeccionista)
                 ActivityCompat.startActivity(contexto, intent, null)
             }
         }

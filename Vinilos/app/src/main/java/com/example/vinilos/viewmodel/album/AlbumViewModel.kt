@@ -44,7 +44,7 @@ class AlbumViewModel(application: Application) : AndroidViewModel(application) {
         refreshDataFromNetwork()
     }
 
-    fun refreshDataFromNetwork() {
+    private fun refreshDataFromNetwork() {
         try {
             viewModelScope.launch(Dispatchers.Default + coroutineExceptionHandler) {
                 withContext(Dispatchers.IO) {

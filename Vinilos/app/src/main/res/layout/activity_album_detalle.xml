@@ -8,6 +8,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#22223A"
     android:paddingLeft="16dp"
     android:paddingTop="16dp"
     android:paddingRight="16dp"
@@ -39,8 +40,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/titleAlbumDetalle"
-        android:contentDescription="TODO" />
+        app:layout_constraintTop_toBottomOf="@+id/titleAlbumDetalle" />
 
 
     <TextView
@@ -287,22 +287,6 @@
             />
 
     </LinearLayout>
-
-    <Button
-        android:id="@+id/buttonAsociarTrack"
-        android:layout_width="210dp"
-        android:layout_height="48dp"
-        android:layout_marginVertical="35dp"
-        android:background="@drawable/custom_border"
-        android:fontFamily="@font/poppins_light"
-        android:paddingHorizontal="15dp"
-        android:text="@string/asociar_track"
-        android:textAllCaps="false"
-        android:textColor="@color/white"
-        android:textSize="22sp"
-        app:layout_constraintTop_toBottomOf="@+id/albumTracksLayout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

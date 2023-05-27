@@ -9,10 +9,10 @@ import com.example.vinilos.R
 import com.example.vinilos.data.track.Track
 
 class TracksAdapter() : RecyclerView.Adapter<TracksAdapter.TracksViewHolder>() {
-    var dataAdapter: ArrayList<Track>? = null
+    private var data: ArrayList<Track>? = null
 
     fun setData(list: ArrayList<Track>) {
-        dataAdapter = list
+        data = list
     }
 
     override fun onCreateViewHolder(
@@ -24,11 +24,11 @@ class TracksAdapter() : RecyclerView.Adapter<TracksAdapter.TracksViewHolder>() {
     }
 
     override fun getItemCount(): Int {
-        return dataAdapter?.size ?: 0
+        return data?.size ?: 0
     }
 
     override fun onBindViewHolder(holder: TracksViewHolder, position: Int) {
-        val item = dataAdapter?.get(position)
+        val item = data?.get(position)
         holder.bindView(item)
 
     }

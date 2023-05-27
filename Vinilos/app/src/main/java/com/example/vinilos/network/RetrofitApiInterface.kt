@@ -7,7 +7,6 @@ import com.example.vinilos.data.artista.ArtistaDetalle
 import com.example.vinilos.data.coleccionista.Coleccionista
 import com.example.vinilos.data.coleccionista.ColeccionistaDetalle
 import com.example.vinilos.data.premio.Premio
-import com.example.vinilos.data.track.Track
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -39,11 +38,4 @@ interface RetrofitApiInterface {
 
     @GET("/prizes/{idPrize}")
     fun getPrize(@Path("idPrize") idPrize: Int): Call<Premio>
-
-    @POST("/albums")
-    fun createAlbum(@Body body: Album): Call<Album?>
-
-    @POST("/albums/{idAlbum}/tracks")
-    fun addTrackToAlbum(@Path("idAlbum") idAlbum: Int, @Body body: Track): Call<Track?>
-
 }

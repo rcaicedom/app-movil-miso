@@ -28,24 +28,22 @@ class ColeccionistaDetalleActivity: AppCompatActivity() {
     private lateinit var albumesColeccionistaAdapter: AlbumesColeccionistaAdapter
     private lateinit var albumesColeccionistaRecycler: RecyclerView
     private lateinit var albumesColeccionistaEmptyText: TextView
-    private var esColeccionista: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         coleccionistaDetalleBinding = ActivityColeccionistaDetalleBinding.inflate(layoutInflater)
         setContentView(coleccionistaDetalleBinding.root)
         idColeccionista = intent.getIntExtra("ID-COLECCIONISTA", 0)
-        esColeccionista = intent.getBooleanExtra("COLECCIONISTA", false)
         coleccionistaName = coleccionistaDetalleBinding.titleColeccionistaDetalle
 
         artistasRecycler = coleccionistaDetalleBinding.coleccionistaArtistasRecycler
-        artistasAdapter = ArtistasAdapter(this, esColeccionista)
+        artistasAdapter = ArtistasAdapter(this)
         artistasRecycler.layoutManager = LinearLayoutManager(this)
         artistasRecycler.adapter = artistasAdapter
         artistasEmptyText = coleccionistaDetalleBinding.artistasEmptyTextColeccionista
 
         albumesColeccionistaRecycler = coleccionistaDetalleBinding.coleccionistaAlbumesRecycler
-        albumesColeccionistaAdapter = AlbumesColeccionistaAdapter(this, esColeccionista)
+        albumesColeccionistaAdapter = AlbumesColeccionistaAdapter(this)
         albumesColeccionistaRecycler.layoutManager = GridLayoutManager(this, 2)
         albumesColeccionistaRecycler.adapter = albumesColeccionistaAdapter
         albumesColeccionistaEmptyText = coleccionistaDetalleBinding.albumesEmptyTextColeccionista

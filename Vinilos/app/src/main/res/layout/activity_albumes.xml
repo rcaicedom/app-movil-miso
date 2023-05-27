@@ -41,8 +41,7 @@
         app:layout_constraintStart_toEndOf="@+id/titleAlbumes"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/add"
-        app:tint="@color/white"
-        android:contentDescription="TODO" />
+        app:tint="@color/white" />
 
     <TextView
         android:id="@+id/textAlbumesVacios"

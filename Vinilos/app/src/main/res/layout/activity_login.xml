@@ -36,7 +36,7 @@
         android:layout_marginTop="120dp"
         android:background="@drawable/button_border"
         android:fontFamily="@font/poppins_light"
-        android:text="@string/ingresar_como_coleccionista"
+        android:text="Ingresar como Coleccionista"
         android:textAllCaps="false"
         android:textColor="@color/white"
         android:textSize="18sp"
@@ -52,7 +52,7 @@
         android:layout_marginTop="30dp"
         android:background="@drawable/button_border"
         android:fontFamily="@font/poppins_light"
-        android:text="@string/ingresar_como_visitante"
+        android:text="Ingresar como Visitante"
         android:textAllCaps="false"
         android:textColor="@color/white"
         android:textSize="18sp"
@@ -87,8 +87,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/vinyl"
-        android:contentDescription="TODO" />
+        app:srcCompat="@drawable/vinyl" />
 
     <ProgressBar
         android:id="@+id/loading"

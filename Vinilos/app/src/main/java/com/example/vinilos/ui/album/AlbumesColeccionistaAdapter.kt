@@ -17,7 +17,7 @@ import com.example.vinilos.viewmodel.album.AlbumDetalleViewModel
 import com.squareup.picasso.Picasso
 
 
-class AlbumesColeccionistaAdapter(private val contexto: AppCompatActivity, private val esColeccionista: Boolean) :
+class AlbumesColeccionistaAdapter(private val contexto: AppCompatActivity) :
     RecyclerView.Adapter<AlbumesColeccionistaAdapter.AlbumesColeccionistaViewHolder>() {
     private var data: ArrayList<AlbumColeccionista>? = null
 
@@ -39,14 +39,14 @@ class AlbumesColeccionistaAdapter(private val contexto: AppCompatActivity, priva
 
     override fun onBindViewHolder(holder: AlbumesColeccionistaViewHolder, position: Int) {
         val item = data?.get(position)
-        holder.bindView(item, contexto, esColeccionista)
+        holder.bindView(item, contexto)
 
     }
 
     class AlbumesColeccionistaViewHolder(itemView: View) :
         RecyclerView.ViewHolder(itemView) {
 
-        fun bindView(item: AlbumColeccionista?, contexto: AppCompatActivity, esColeccionista: Boolean) {
+        fun bindView(item: AlbumColeccionista?, contexto: AppCompatActivity) {
             val id = item!!.id
 
             val viewModel = ViewModelProvider(
@@ -64,7 +64,6 @@ class AlbumesColeccionistaAdapter(private val contexto: AppCompatActivity, priva
                 layout.setOnClickListener {
                     val intent = Intent(contexto, AlbumDetalleActivity::class.java)
                     intent.putExtra("ID-ALBUM", albumDetalle?.id)
-                    intent.putExtra("COLECCIONISTA", esColeccionista)
                     ActivityCompat.startActivity(contexto, intent, null)
                 }
             }

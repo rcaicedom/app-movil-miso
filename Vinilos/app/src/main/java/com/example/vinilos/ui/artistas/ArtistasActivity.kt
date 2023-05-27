@@ -27,15 +27,13 @@ class ArtistasActivity : AppCompatActivity() {
     private lateinit var recycler: RecyclerView
     private lateinit var navigation: BottomNavigationView
     private lateinit var artistasVacios: TextView
-    private var esColeccionista: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         artistaBinding = ActivityArtistaBinding.inflate(layoutInflater)
         setContentView(artistaBinding.root)
-        esColeccionista = intent.getBooleanExtra("COLECCIONISTA", false)
         recycler = findViewById(R.id.artistasRecycler)
-        adapter = ArtistasAdapter(this, esColeccionista)
+        adapter = ArtistasAdapter(this)
         recycler.layoutManager = LinearLayoutManager(this)
         recycler.adapter = adapter
 
@@ -62,7 +60,6 @@ class ArtistasActivity : AppCompatActivity() {
                 R.id.artistas -> true
                 R.id.albumes -> {
                     intent = Intent(this, AlbumesActivity::class.java)
-                    intent.putExtra("COLECCIONISTA", esColeccionista)
                     intent.flags =Intent.FLAG_ACTIVITY_REORDER_TO_FRONT
                     ActivityCompat.startActivity(
                         this,
@@ -73,7 +70,6 @@ class ArtistasActivity : AppCompatActivity() {
                 }
                 R.id.coleccionistas -> {
                     intent = Intent(this, ColeccionistasActivity::class.java)
-                    intent.putExtra("COLECCIONISTA", esColeccionista)
                     intent.flags =Intent.FLAG_ACTIVITY_REORDER_TO_FRONT
                     ActivityCompat.startActivity(
                         this,
