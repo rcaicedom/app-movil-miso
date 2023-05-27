@@ -19,4 +19,8 @@ class AlbumRepository(private val application: Application) {
             potentialResp
         }
     }
+
+    suspend fun createAlbum(album: Album): Boolean {
+        return NetworkServiceAdapter.getInstance(application).createAlbum(album)
+    }
 }

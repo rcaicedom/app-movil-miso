@@ -14,12 +14,12 @@ import com.example.vinilos.R
 import com.example.vinilos.data.album.Album
 import com.squareup.picasso.Picasso
 
-class AlbumesAdapter(private val contexto: AppCompatActivity) :
+class AlbumesAdapter(private val contexto: AppCompatActivity, private val esColeccionista: Boolean) :
     RecyclerView.Adapter<AlbumesAdapter.AlbumesViewHolder>() {
-    private var data: ArrayList<Album>? = null
+    var dataAdapter: ArrayList<Album>? = null
 
     fun setData(list: ArrayList<Album>) {
-        data = list
+        dataAdapter = list
     }
 
     override fun onCreateViewHolder(
@@ -31,19 +31,19 @@ class AlbumesAdapter(private val contexto: AppCompatActivity) :
     }
 
     override fun getItemCount(): Int {
-        return data?.size ?: 0
+        return dataAdapter?.size ?: 0
     }
 
     override fun onBindViewHolder(holder: AlbumesViewHolder, position: Int) {
-        val item = data?.get(position)
-        holder.bindView(item, contexto)
+        val item = dataAdapter?.get(position)
+        holder.bindView(item, contexto, esColeccionista)
 
     }
 
     class AlbumesViewHolder(itemView: View) :
         RecyclerView.ViewHolder(itemView) {
 
-        fun bindView(item: Album?, contexto: AppCompatActivity) {
+        fun bindView(item: Album?, contexto: AppCompatActivity, esColeccionista: Boolean) {
             val name: TextView = itemView.findViewById(R.id.albumIconName)
             name.text = item?.name
 
@@ -54,6 +54,7 @@ class AlbumesAdapter(private val contexto: AppCompatActivity) :
             layout.setOnClickListener {
                 val intent = Intent(contexto, AlbumDetalleActivity::class.java)
                 intent.putExtra("ID-ALBUM", item?.id)
+                intent.putExtra("COLECCIONISTA", esColeccionista)
                 ActivityCompat.startActivity(contexto, intent, null)
             }
         }
