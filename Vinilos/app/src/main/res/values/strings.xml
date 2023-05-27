@@ -44,6 +44,9 @@
     <string name="duracion_del_track">Duracion del track</string>
     <string name="asociar_track">Asociar Track</string>
     <string name="duracion_del_track_en_segundos">Duracion del track en segundos:</string>
+    <string name="ingresar_como_coleccionista">Ingresar como Coleccionista</string>
+    <string name="ingresar_como_visitante">Ingresar como Visitante</string>
+    <string name="ver">Ver</string>
 
     <string-array name="generos">
         <item>Classical</item>
