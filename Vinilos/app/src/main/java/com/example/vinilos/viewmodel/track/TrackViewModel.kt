@@ -1,29 +1,28 @@
-package com.example.vinilos.viewmodel.album
+package com.example.vinilos.viewmodel.track
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import com.example.vinilos.data.album.Album
-import com.example.vinilos.data.album.AlbumRepository
+import com.example.vinilos.data.track.Track
+import com.example.vinilos.data.track.TrackRepository
 import kotlinx.coroutines.CoroutineExceptionHandler
-import java.lang.Exception
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.lang.Exception
 
-class AlbumViewModel(application: Application) : AndroidViewModel(application) {
+class TrackViewModel(application: Application, idAlbum: Int, track: Track) : AndroidViewModel(application) {
 
-    private val albumRepository = AlbumRepository(application)
+    private val trackRepository = TrackRepository(application)
 
-    private val _albums = MutableLiveData<List<Album>>()
+    private val _trackCreado = MutableLiveData<Boolean>()
 
-    val albums: LiveData<List<Album>>
-        get() = _albums
+    val trackCreado: LiveData<Boolean>
+        get() = _trackCreado
 
     private var _eventNetworkError = MutableLiveData<Boolean>(false)
 
@@ -41,21 +40,21 @@ class AlbumViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     init {
-        refreshDataFromNetwork()
+        refreshDataFromNetwork(idAlbum, track)
     }
 
-    fun refreshDataFromNetwork() {
-        try {
+    private fun refreshDataFromNetwork(idAlbum: Int, track: Track) {
+        try{
             viewModelScope.launch(Dispatchers.Default + coroutineExceptionHandler) {
                 withContext(Dispatchers.IO) {
-                    _albums.postValue(albumRepository.refreshData())
+                    val data = trackRepository.addTrackToAlbum(idAlbum, track)
+                    _trackCreado.postValue(data)
                 }
                 _eventNetworkError.postValue(false)
                 _isNetworkErrorShown.postValue(false)
             }
         }
         catch (e: Exception){
-            Log.d("Error", e.toString())
             _eventNetworkError.postValue(true)
         }
     }
@@ -64,11 +63,11 @@ class AlbumViewModel(application: Application) : AndroidViewModel(application) {
         _isNetworkErrorShown.value = true
     }
 
-    class Factory(val app: Application) : ViewModelProvider.Factory {
+    class Factory(val app: Application, private val idAlbum: Int, private val track: Track) : ViewModelProvider.Factory {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            if (modelClass.isAssignableFrom(AlbumViewModel::class.java)) {
+            if (modelClass.isAssignableFrom(TrackViewModel::class.java)) {
                 @Suppress("UNCHECKED_CAST")
-                return AlbumViewModel(app) as T
+                return TrackViewModel(app, idAlbum, track) as T
             }
             throw IllegalArgumentException("Unable to construct viewmodel")
         }

@@ -31,17 +31,17 @@ class AlbumesActivity : AppCompatActivity() {
     private var esColeccionista: Boolean = false
     private lateinit var navigation: BottomNavigationView
     private lateinit var albumesVacios: TextView
-    val CREATE_ALBUM_REQUEST = 74
+    private val CREATE_ALBUM_REQUEST = 74
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         albumesBinding = ActivityAlbumesBinding.inflate(layoutInflater)
         setContentView(albumesBinding.root)
         recycler = findViewById(R.id.recyclerAlbumes)
-        adapter = AlbumesAdapter(this)
+        esColeccionista = intent.getBooleanExtra("COLECCIONISTA", false)
+        adapter = AlbumesAdapter(this, esColeccionista)
         recycler.layoutManager = GridLayoutManager(this, 2)
         recycler.adapter = adapter
-        esColeccionista = intent.getBooleanExtra("COLECCIONISTA", false)
         anadirButton = albumesBinding.agregarAlbumButton
         if (!esColeccionista) {
             anadirButton.visibility = View.GONE
@@ -49,12 +49,18 @@ class AlbumesActivity : AppCompatActivity() {
         } else {
             anadirButton.setOnClickListener{
                 try {
-                    ActivityCompat.startActivityForResult(this, Intent(this, AlbumCreateActivity::class.java), CREATE_ALBUM_REQUEST, null)
+                    val intent = Intent(this, AlbumCreateActivity::class.java)
+                    intent.putExtra("COLECCIONISTA", esColeccionista)
+                    ActivityCompat.startActivityForResult(this, intent, CREATE_ALBUM_REQUEST, null)
                 } catch (e: ActivityNotFoundException) {
                     // display error state to the user
                 }
             }
         }
+        viewModel = ViewModelProvider(
+            this,
+            AlbumViewModel.Factory(application)
+        ).get(AlbumViewModel::class.java)
         loadData()
         albumesVacios = albumesBinding.textAlbumesVacios
         navigation = albumesBinding.albumesBottomNavigation
@@ -63,7 +69,8 @@ class AlbumesActivity : AppCompatActivity() {
         navigation.setOnNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.artistas -> {
-                    intent = Intent(this, ArtistasActivity::class.java)
+                    val intent = Intent(this, ArtistasActivity::class.java)
+                    intent.putExtra("COLECCIONISTA", esColeccionista)
                     intent.flags = Intent.FLAG_ACTIVITY_REORDER_TO_FRONT
                     ActivityCompat.startActivity(
                         this,
@@ -74,7 +81,8 @@ class AlbumesActivity : AppCompatActivity() {
                 }
 
                 R.id.coleccionistas -> {
-                    intent = Intent(this, ColeccionistasActivity::class.java)
+                    val intent = Intent(this, ColeccionistasActivity::class.java)
+                    intent.putExtra("COLECCIONISTA", esColeccionista)
                     intent.flags = Intent.FLAG_ACTIVITY_REORDER_TO_FRONT
                     ActivityCompat.startActivity(
                         this,
@@ -97,10 +105,7 @@ class AlbumesActivity : AppCompatActivity() {
     }
 
     private fun loadData(){
-        viewModel = ViewModelProvider(
-            this,
-            AlbumViewModel.Factory(application)
-        ).get(AlbumViewModel::class.java)
+        viewModel.refreshDataFromNetwork()
         viewModel.albums.observe(this) {
             if(it?.isNotEmpty() == true) {
                 recycler.visibility = View.VISIBLE
@@ -119,7 +124,7 @@ class AlbumesActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == CREATE_ALBUM_REQUEST && resultCode == RESULT_OK) {
             val newAlbum = data?.getSerializableExtra("NEW-ALBUM")
-            adapter.setData((adapter.dataAdapter?.plus(newAlbum)) as ArrayList<Album>)
+            loadData()
         }
     }
 
