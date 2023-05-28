@@ -36,7 +36,7 @@
         <TextView
             android:id="@+id/labelColeccionistaDetalleArtistas"
             android:layout_width="wrap_content"
-            android:layout_height="20dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="35dp"
             android:layout_marginStart="20dp"
             android:fontFamily="@font/poppins_light"
@@ -52,7 +52,8 @@
 
         <LinearLayout
             android:id="@+id/coleccionistaArtistasLayout"
-            android:layout_width="356dp"
+            android:layout_width="wrap_content"
+            android:minWidth="356dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="22dp"
             android:orientation="vertical"
@@ -91,7 +92,7 @@
         <TextView
             android:id="@+id/labelColeccionistaDetalleAlbumes"
             android:layout_width="wrap_content"
-            android:layout_height="20dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="35dp"
             android:layout_marginStart="20dp"
             android:fontFamily="@font/poppins_light"
@@ -107,7 +108,8 @@
 
         <LinearLayout
             android:id="@+id/coleccionistaAlbumesLayout"
-            android:layout_width="356dp"
+            android:layout_width="wrap_content"
+            android:minWidth="356dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="22dp"
             android:orientation="vertical"

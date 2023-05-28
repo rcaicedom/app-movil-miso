@@ -1,6 +1,8 @@
 package com.example.vinilos.network
 
 import android.content.Context
+import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.vinilos.data.album.Album
@@ -10,6 +12,7 @@ import com.example.vinilos.data.artista.ArtistaDetalle
 import com.example.vinilos.data.coleccionista.Coleccionista
 import com.example.vinilos.data.coleccionista.ColeccionistaDetalle
 import com.example.vinilos.data.premio.Premio
+import com.example.vinilos.data.track.Track
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
 import retrofit2.Call
@@ -214,6 +217,35 @@ class NetworkServiceAdapter constructor(context: Context) {
                 } else {
                     data.value = null
                 }
+                it.resume(data)
+            }
+        })
+    }
+
+    suspend fun createAlbum( album: Album) = suspendCoroutine {
+        var data : Boolean
+        retrofitApiInterface.createAlbum(album).enqueue(object : Callback<Album?> {
+            override fun onFailure(call: Call<Album?>, t: Throwable) {
+                it.resumeWithException(t)
+            }
+
+            override fun onResponse(call: Call<Album?>, response: Response<Album?>) {
+
+                data = response.code() == 200 && response.body() != null
+                it.resume(data)
+            }
+        })
+    }
+
+    suspend fun addTrackToAlbum(idAlbum: Int, track: Track) = suspendCoroutine {
+        var data : Boolean
+        retrofitApiInterface.addTrackToAlbum(idAlbum, track).enqueue(object : Callback<Track?> {
+            override fun onFailure(call: Call<Track?>, t: Throwable) {
+                it.resumeWithException(t)
+            }
+
+            override fun onResponse(call: Call<Track?>, response: Response<Track?>) {
+                data = response.code() == 200 && response.body() != null
                 it.resume(data)
             }
         })

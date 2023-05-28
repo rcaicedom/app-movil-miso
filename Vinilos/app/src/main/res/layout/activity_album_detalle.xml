@@ -8,7 +8,6 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#22223A"
     android:paddingLeft="16dp"
     android:paddingTop="16dp"
     android:paddingRight="16dp"
@@ -40,13 +39,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/titleAlbumDetalle" />
+        app:layout_constraintTop_toBottomOf="@+id/titleAlbumDetalle"
+        android:contentDescription="TODO" />
 
 
     <TextView
         android:id="@+id/labelAlbumDetalleFecha"
         android:layout_width="wrap_content"
-        android:layout_height="20dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:layout_marginStart="20dp"
 
@@ -64,7 +64,7 @@
     <TextView
         android:id="@+id/textAlbumDetalleFecha"
         android:layout_width="wrap_content"
-        android:layout_height="20dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:layout_marginStart="10dp"
         android:fontFamily="@font/poppins_light"
@@ -80,7 +80,7 @@
     <TextView
         android:id="@+id/labelAlbumDetalleDescripcion"
         android:layout_width="wrap_content"
-        android:layout_height="20dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="22dp"
         android:layout_marginStart="20dp"
         android:fontFamily="@font/poppins_light"
@@ -114,7 +114,7 @@
     <TextView
         android:id="@+id/labelAlbumDetalleGenero"
         android:layout_width="wrap_content"
-        android:layout_height="20dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="22dp"
         android:layout_marginStart="20dp"
         android:fontFamily="@font/poppins_light"
@@ -131,7 +131,7 @@
     <TextView
         android:id="@+id/textAlbumDetalleGenero"
         android:layout_width="wrap_content"
-        android:layout_height="20dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:layout_marginStart="10dp"
         android:fontFamily="@font/poppins_light"
@@ -147,7 +147,7 @@
     <TextView
         android:id="@+id/labelAlbumDetalleCasa"
         android:layout_width="wrap_content"
-        android:layout_height="20dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="22dp"
         android:layout_marginStart="20dp"
         android:fontFamily="@font/poppins_light"
@@ -164,7 +164,7 @@
     <TextView
         android:id="@+id/textAlbumDetalleCasa"
         android:layout_width="wrap_content"
-        android:layout_height="20dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:layout_marginStart="10dp"
         android:fontFamily="@font/poppins_light"
@@ -180,7 +180,7 @@
     <TextView
         android:id="@+id/labelAlbumDetalleArtistas"
         android:layout_width="wrap_content"
-        android:layout_height="20dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="22dp"
         android:layout_marginStart="20dp"
         android:fontFamily="@font/poppins_light"
@@ -196,7 +196,8 @@
 
     <LinearLayout
         android:id="@+id/albumArtistasLayout"
-        android:layout_width="356dp"
+        android:layout_width="wrap_content"
+        android:minWidth="356dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="22dp"
         android:orientation="vertical"
@@ -235,7 +236,7 @@
     <TextView
         android:id="@+id/labelAlbumDetalleTracks"
         android:layout_width="wrap_content"
-        android:layout_height="20dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="22dp"
         android:layout_marginStart="20dp"
         android:fontFamily="@font/poppins_light"
@@ -251,7 +252,8 @@
 
     <LinearLayout
         android:id="@+id/albumTracksLayout"
-        android:layout_width="356dp"
+        android:layout_width="wrap_content"
+        android:minWidth="356dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="22dp"
         android:orientation="vertical"
@@ -287,6 +289,24 @@
             />
 
     </LinearLayout>
+
+    <Button
+        android:id="@+id/buttonAsociarTrack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minWidth="210dp"
+        android:minHeight="48dp"
+        android:layout_marginVertical="35dp"
+        android:background="@drawable/custom_border"
+        android:fontFamily="@font/poppins_light"
+        android:paddingHorizontal="15dp"
+        android:text="@string/asociar_track"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="22sp"
+        app:layout_constraintTop_toBottomOf="@+id/albumTracksLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

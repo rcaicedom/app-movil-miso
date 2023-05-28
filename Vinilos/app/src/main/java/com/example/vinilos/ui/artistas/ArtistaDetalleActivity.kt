@@ -26,6 +26,7 @@ class ArtistaDetalleActivity: AppCompatActivity() {
     private lateinit var viewModel: ArtistaDetalleViewModel
     private var idArtista: Int = 0
     private var esMusico: Boolean = false
+    private var esColeccionista: Boolean = false
     private lateinit var artistaName: TextView
     private lateinit var artistaDate: TextView
     private lateinit var artistaDateLabel: TextView
@@ -52,6 +53,7 @@ class ArtistaDetalleActivity: AppCompatActivity() {
         setContentView(artistaDetalleBinding.root)
         idArtista = intent.getIntExtra("ID-ARTISTA", 0)
         esMusico = intent.getBooleanExtra("ES-MUSICO", false)
+        esColeccionista = intent.getBooleanExtra("COLECCIONISTA", false)
         artistaName = artistaDetalleBinding.titleArtistaDetalle
         artistaDate = artistaDetalleBinding.textArtistaDetalleFecha
         artistaDateLabel = artistaDetalleBinding.labelArtistaDetalleFecha
@@ -59,13 +61,13 @@ class ArtistaDetalleActivity: AppCompatActivity() {
         artistaImagen = artistaDetalleBinding.artistaDetalleImagen
 
         albumesRecycler = artistaDetalleBinding.artistaAlbumesRecycler
-        albumesAdapter = AlbumesAdapter(this)
+        albumesAdapter = AlbumesAdapter(this, esColeccionista)
         albumesRecycler.layoutManager = GridLayoutManager(this, 2)
         albumesRecycler.adapter = albumesAdapter
         albumesEmptyText = artistaDetalleBinding.albumesEmptyText
 
         artistasRecycler = artistaDetalleBinding.artistaArtistasRecycler
-        artistasAdapter = ArtistasAdapter(this)
+        artistasAdapter = ArtistasAdapter(this, esColeccionista)
         artistasRecycler.layoutManager = LinearLayoutManager(this)
         artistasRecycler.adapter = artistasAdapter
         artistasEmptyText = artistaDetalleBinding.artistasEmptyText

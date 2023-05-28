@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.vinilos.R
 import com.example.vinilos.data.coleccionista.Coleccionista
 
-class ColeccionistasAdapter(private val contexto: ColeccionistasActivity): RecyclerView.Adapter<ColeccionistasAdapter.ColeccionistaViewHolder>() {
+class ColeccionistasAdapter(private val contexto: ColeccionistasActivity, private val esColeccionista: Boolean): RecyclerView.Adapter<ColeccionistasAdapter.ColeccionistaViewHolder>() {
     private var data: ArrayList<Coleccionista>? = null
 
     fun setData(list: ArrayList<Coleccionista>) {
@@ -22,7 +22,7 @@ class ColeccionistasAdapter(private val contexto: ColeccionistasActivity): Recyc
         parent: ViewGroup, viewType: Int
     ): ColeccionistaViewHolder {
         return ColeccionistaViewHolder(
-            LayoutInflater.from(parent.context).inflate(R.layout.coleccionista_icon, parent, false), contexto
+            LayoutInflater.from(parent.context).inflate(R.layout.coleccionista_icon, parent, false), contexto, esColeccionista
         )
     }
 
@@ -36,7 +36,7 @@ class ColeccionistasAdapter(private val contexto: ColeccionistasActivity): Recyc
 
     }
 
-    class ColeccionistaViewHolder(itemView: View, private val contexto: ColeccionistasActivity) :
+    class ColeccionistaViewHolder(itemView: View, private val contexto: ColeccionistasActivity, private val esColeccionista: Boolean) :
         RecyclerView.ViewHolder(itemView) {
 
         fun bindView(item: Coleccionista?) {
@@ -44,9 +44,11 @@ class ColeccionistasAdapter(private val contexto: ColeccionistasActivity): Recyc
             name.text = item?.name
 
             val boton: Button = itemView.findViewById(R.id.botonColeccionista)
+            boton.contentDescription = "Ver coleccionista " + item?.name
             boton.setOnClickListener {
                 val intent = Intent(contexto, ColeccionistaDetalleActivity::class.java)
                 intent.putExtra("ID-COLECCIONISTA", item?.id)
+                intent.putExtra("COLECCIONISTA", esColeccionista)
                 ActivityCompat.startActivity(contexto, intent, null)
             }
         }

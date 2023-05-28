@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.vinilos.R
 import com.example.vinilos.data.artista.Artista
 
-class ArtistasAdapter(private val contexto: AppCompatActivity) :RecyclerView.Adapter<ArtistasAdapter.ArtistaViewHolder>() {
+class ArtistasAdapter(private val contexto: AppCompatActivity, private val esColeccionista: Boolean) :RecyclerView.Adapter<ArtistasAdapter.ArtistaViewHolder>() {
     private var data: ArrayList<Artista>? = null
 
     fun setData(list: ArrayList<Artista>) {
@@ -33,21 +33,23 @@ class ArtistasAdapter(private val contexto: AppCompatActivity) :RecyclerView.Ada
 
     override fun onBindViewHolder(holder: ArtistaViewHolder, position: Int) {
         val item = data?.get(position)
-        holder.bindView(item,contexto)
+        holder.bindView(item,contexto, esColeccionista)
 
     }
 
     class ArtistaViewHolder(itemView: View) :
         RecyclerView.ViewHolder(itemView) {
 
-        fun bindView(item: Artista?, contexto: AppCompatActivity) {
+        fun bindView(item: Artista?, contexto: AppCompatActivity, esColeccionista: Boolean) {
             val name: TextView = itemView.findViewById(R.id.artistaIconName)
             name.text = item?.name
             val boton: Button =itemView.findViewById(R.id.botonArtista)
+            boton.contentDescription = "Ver coleccionista " + item?.name
             boton.setOnClickListener {
                 val intent = Intent(contexto, ArtistaDetalleActivity::class.java)
                 intent.putExtra("ID-ARTISTA", item?.id)
                 intent.putExtra("ES-MUSICO", item?.birthDate != null)
+                intent.putExtra("COLECCIONISTA", esColeccionista)
                 ActivityCompat.startActivity(contexto, intent, null)
             }
         }
