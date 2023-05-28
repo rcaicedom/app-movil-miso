@@ -39,6 +39,8 @@
     <string name="ingresar_como_coleccionista">Ingresar como Coleccionista</string>
     <string name="ingresar_como_visitante">Ingresar como Visitante</string>
     <string name="ver">Ver</string>
+    <string name="agregaralbum">agregarAlbum</string>
+    <string name="portada">Portada</string>
 
     <string-array name="generos">
         <item>Classical</item>

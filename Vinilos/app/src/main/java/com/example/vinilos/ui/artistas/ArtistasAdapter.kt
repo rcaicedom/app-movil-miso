@@ -44,6 +44,7 @@ class ArtistasAdapter(private val contexto: AppCompatActivity, private val esCol
             val name: TextView = itemView.findViewById(R.id.artistaIconName)
             name.text = item?.name
             val boton: Button =itemView.findViewById(R.id.botonArtista)
+            boton.contentDescription = "Ver coleccionista " + item?.name
             boton.setOnClickListener {
                 val intent = Intent(contexto, ArtistaDetalleActivity::class.java)
                 intent.putExtra("ID-ARTISTA", item?.id)

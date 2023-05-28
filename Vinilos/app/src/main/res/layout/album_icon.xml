@@ -23,7 +23,7 @@
             android:layout_height="100dp"
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
-            android:contentDescription="TODO" />
+            android:contentDescription="@string/portada" />
 
         <TextView
             android:id="@+id/albumIconName"

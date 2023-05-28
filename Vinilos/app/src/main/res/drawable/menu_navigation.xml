@@ -3,16 +3,22 @@
 
     <item
         android:id="@+id/albumes"
-        android:title="Albumes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:title="Albums"
         android:icon="@drawable/vinyl"/>
     <item
         android:id="@+id/coleccionistas"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:title="Coleccionistas"
         android:icon="@drawable/profile"
         />
 
     <item
         android:id="@+id/artistas"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:title="Artistas"
         android:icon="@drawable/microphone"/>
 
