@@ -29,20 +29,20 @@
 
     <ImageButton
         android:id="@+id/agregarAlbumButton"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
+        android:layout_width="13dp"
+        android:layout_height="38dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="24.5dp"
         android:layout_marginEnd="6dp"
         android:adjustViewBounds="true"
         android:background="@drawable/custom_border"
+        android:contentDescription="agregarAlbum"
         android:scaleType="centerInside"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/titleAlbumes"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/add"
-        app:tint="@color/white"
-        android:contentDescription="TODO" />
+        app:tint="@color/white" />
 
     <TextView
         android:id="@+id/textAlbumesVacios"
