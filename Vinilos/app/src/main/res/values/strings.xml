@@ -1,13 +1,8 @@
 <resources>
     <string name="app_name">Vinilos</string>
     <string name="bienvenidos">Bienvenido!</string>
-    <string name="usuario">Usuario</string>
-    <string name="contrasena">Contraseña</string>
-    <string name="ingresar">Ingresar</string>
     <string name="albums">Albumes</string>
-    <string name="add">+</string>
     <string name="artistas">Artistas</string>
-    <string name="title_activity_artistas">ArtistasActivity</string>
     <string name="descripcion">Descripcion:</string>
     <string name="fecha_de_salida_al_mercado">Fecha de salida:</string>
     <string name="genero">Genero:</string>
@@ -35,13 +30,10 @@
     <string name="fecha_de_salida_al_mercado2">Fecha de salida al mercado</string>
     <string name="descripcion_del_album">Descripcion del album</string>
     <string name="crear">Crear</string>
-    <string name="album">Album:</string>
     <string name="asociar_track_a_album">Asociar track a album</string>
     <string name="asociar">Asociar</string>
-    <string name="track">Track</string>
     <string name="nombre_del_track">Nombre del Track:</string>
     <string name="duracion">Duracion:</string>
-    <string name="duracion_del_track">Duracion del track</string>
     <string name="asociar_track">Asociar Track</string>
     <string name="duracion_del_track_en_segundos">Duracion del track en segundos:</string>
     <string name="ingresar_como_coleccionista">Ingresar como Coleccionista</string>
