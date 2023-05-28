@@ -46,7 +46,7 @@
         <TextView
             android:id="@+id/labelArtistaDetalleFecha"
             android:layout_width="wrap_content"
-            android:layout_height="20dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:layout_marginStart="20dp"
 
@@ -64,7 +64,7 @@
         <TextView
             android:id="@+id/textArtistaDetalleFecha"
             android:layout_width="wrap_content"
-            android:layout_height="20dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:layout_marginStart="10dp"
             android:fontFamily="@font/poppins_light"
@@ -80,7 +80,7 @@
         <TextView
             android:id="@+id/labelArtistaDetalleDescripcion"
             android:layout_width="wrap_content"
-            android:layout_height="20dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="22dp"
             android:layout_marginStart="20dp"
             android:fontFamily="@font/poppins_light"
@@ -114,7 +114,7 @@
         <TextView
             android:id="@+id/labelArtistaDetalleAlbumes"
             android:layout_width="wrap_content"
-            android:layout_height="20dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="22dp"
             android:layout_marginStart="20dp"
             android:fontFamily="@font/poppins_light"
@@ -130,7 +130,8 @@
 
         <LinearLayout
             android:id="@+id/artistaAlbumesLayout"
-            android:layout_width="356dp"
+            android:layout_width="wrap_content"
+            android:minWidth="356dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="22dp"
             android:orientation="vertical"
@@ -170,7 +171,7 @@
         <TextView
             android:id="@+id/labelArtistaDetalleArtistas"
             android:layout_width="wrap_content"
-            android:layout_height="20dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="22dp"
             android:layout_marginStart="20dp"
             android:fontFamily="@font/poppins_light"
@@ -186,7 +187,8 @@
 
         <LinearLayout
             android:id="@+id/artistaArtistasLayout"
-            android:layout_width="356dp"
+            android:layout_width="wrap_content"
+            android:minWidth="356dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="22dp"
             android:orientation="vertical"
@@ -225,7 +227,7 @@
         <TextView
             android:id="@+id/labelArtistaDetallePremios"
             android:layout_width="wrap_content"
-            android:layout_height="20dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="22dp"
             android:layout_marginStart="20dp"
             android:fontFamily="@font/poppins_light"
@@ -241,7 +243,8 @@
 
         <LinearLayout
             android:id="@+id/artistaPremiosLayout"
-            android:layout_width="356dp"
+            android:layout_width="wrap_content"
+            android:minWidth="356dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="22dp"
             android:orientation="vertical"

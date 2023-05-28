@@ -44,6 +44,7 @@ class ColeccionistasAdapter(private val contexto: ColeccionistasActivity, privat
             name.text = item?.name
 
             val boton: Button = itemView.findViewById(R.id.botonColeccionista)
+            boton.contentDescription = "Ver coleccionista " + item?.name
             boton.setOnClickListener {
                 val intent = Intent(contexto, ColeccionistaDetalleActivity::class.java)
                 intent.putExtra("ID-COLECCIONISTA", item?.id)

@@ -30,7 +30,7 @@
     <TextView
         android:id="@+id/labelAsociarNombre"
         android:layout_width="wrap_content"
-        android:layout_height="20dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="27dp"
         android:layout_marginTop="40dp"
         android:fontFamily="@font/poppins_light"
@@ -47,7 +47,8 @@
     <EditText
         android:id="@+id/editAsociarNombre"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="wrap_content"
+        android:minHeight="48dp"
         android:layout_marginStart="25dp"
         android:layout_marginTop="25dp"
         android:layout_marginEnd="25dp"
@@ -68,7 +69,7 @@
     <TextView
         android:id="@+id/labelAsociarDuracion"
         android:layout_width="wrap_content"
-        android:layout_height="20dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="27dp"
         android:layout_marginTop="30dp"
         android:fontFamily="@font/poppins_light"
@@ -85,7 +86,8 @@
     <EditText
         android:id="@+id/editAsociarDuracion"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="wrap_content"
+        android:minHeight="48dp"
         android:layout_marginStart="25dp"
         android:layout_marginTop="25dp"
         android:layout_marginEnd="25dp"
@@ -106,7 +108,7 @@
     <TextView
         android:id="@+id/labelAsociarAlbum"
         android:layout_width="wrap_content"
-        android:layout_height="20dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="27dp"
         android:layout_marginTop="30dp"
         android:fontFamily="@font/poppins_light"
@@ -138,8 +140,10 @@
 
     <Button
         android:id="@+id/buttonAsociar"
-        android:layout_width="150dp"
-        android:layout_height="48dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minWidth="150dp"
+        android:minHeight="48dp"
         android:layout_marginBottom="22dp"
         android:background="@drawable/custom_border"
         android:fontFamily="@font/poppins_light"
